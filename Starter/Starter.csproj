@@ -1,0 +1,16 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
+    <RootNamespace>ProjectOne</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Apps\AppChatClient\AppChatClient.csproj" />
+    <ProjectReference Include="..\Apps\AppChatServer\AppChatServer.csproj" />
+    <ProjectReference Include="..\Framework\FwBase\FwBase.csproj" />
+    <ProjectReference Include="..\Framework\FwUI\FwUI.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
+    <RootNamespace>ProjectOne</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Resource\Icon\love.svg" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Resource\Icon\love.svg" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Framework\FwBase\FwBase.csproj" />
+    <ProjectReference Include="..\..\Framework\FwUI\FwUI.csproj" />
+  </ItemGroup>
+
+</Project>
