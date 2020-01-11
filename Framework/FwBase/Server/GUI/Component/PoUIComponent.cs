@@ -34,7 +34,7 @@ namespace ProjectOne
             set { Model.ID = value; }
         }
 
-        protected virtual List<PoUIHeadElement> HeadElements()
+        public virtual List<PoUIHeadElement> HeadElements()
         {
             var headElements = new List<PoUIHeadElement>();
             return headElements;

@@ -9,6 +9,8 @@
     <None Remove="Resource\Icon\DesktopIcon_NotFound.svg" />
     <None Remove="Server\GUI\Component\_Model\JS\Main.js" />
     <None Remove="Server\RequestFilter\Desktop\UI\CSS\Desktop.css" />
+    <None Remove="Server\RequestFilter\Desktop\UI\Taskbar\Resource\rocket.svg" />
+    <None Remove="Server\RequestFilter\Desktop\UI\Taskbar\Resource\rocket_hover.svg" />
     <None Remove="Server\Resource\jQuery\jquery-3.4.1.js" />
     <None Remove="Server\Resource\jQuery\jquery-3.4.1.min.js" />
     <None Remove="Server\Resource\login.html" />
@@ -18,6 +20,8 @@
     <EmbeddedResource Include="Resource\Icon\DesktopIcon_NotFound.svg" />
     <EmbeddedResource Include="Server\GUI\Component\_Model\JS\Main.js" />
     <EmbeddedResource Include="Server\RequestFilter\Desktop\UI\CSS\Desktop.css" />
+    <EmbeddedResource Include="Server\RequestFilter\Desktop\UI\Taskbar\Resource\rocket.svg" />
+    <EmbeddedResource Include="Server\RequestFilter\Desktop\UI\Taskbar\Resource\rocket_hover.svg" />
     <EmbeddedResource Include="Server\Resource\jQuery\jquery-3.4.1.js" />
     <EmbeddedResource Include="Server\Resource\jQuery\jquery-3.4.1.min.js" />
     <EmbeddedResource Include="Server\Resource\login.html" />

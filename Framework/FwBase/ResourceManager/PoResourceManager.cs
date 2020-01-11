@@ -34,6 +34,7 @@ namespace ProjectOne
                 //.Select(x => x.ToLowerInvariant())
                 .Where(x => x.Key.EndsWith(resName))
                 .FirstOrDefault();
+            if (res.Key == null || res.Value == null) return false;
             //if (res == default(KeyValuePair<string, Assembly>)) return false;
             using (var stream = res.Value.GetManifestResourceStream(res.Key))
             {

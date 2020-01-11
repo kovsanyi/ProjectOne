@@ -4,6 +4,8 @@
 	background-color: #ebebeb;
 }
 
+/* ##################### Desktop ##################### */
+
 .desktop{
 	display: grid;
 	grid-auto-flow: row;
@@ -28,6 +30,32 @@
 .desktop-item:hover{
 	background-color: #c0c0c0;
 }
+
+.taskbar{
+	position: fixed;
+	bottom: 0;
+	height: 43px;
+	width: 100%;
+	background: #19659e;
+}
+
+.taskbar .icons .icons-left .start-menu{
+	display: inline-block;
+	height: 43px;
+	width: 48px;
+	background-image: url("rocket.svg");
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: 28px 28px;
+	position: absolute;
+}
+
+.taskbar .icons .icons-left .start-menu:hover{
+	background-color: #3472a0;
+	background-image: url("rocket_hover.svg");
+}
+
+/* ##################### Taskbar ##################### */
 
 .taskbar{
 	position: fixed;

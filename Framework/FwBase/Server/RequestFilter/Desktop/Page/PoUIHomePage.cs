@@ -14,9 +14,14 @@ namespace ProjectOne
         }
         public PoUIHomePage()
         {
-            var desktop = PoUIDesktop.Instance;
+            var wrapper = new PoUILayout();
+            wrapper.ID = "wrapper";
+
+            wrapper.Add(PoUIDesktop.Instance);
+            wrapper.Add(PoUITaskbar.Instance);
+
             Title = "Home";
-            Body = desktop;
+            Body = wrapper;
         }
     }
 }

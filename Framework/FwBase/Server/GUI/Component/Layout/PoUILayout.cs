@@ -16,5 +16,13 @@ namespace ProjectOne
             Model.Tag = "div";
             _items = new List<PoUIComponent>();
         }
+
+        public override List<PoUIHeadElement> HeadElements()
+        {
+            var headElemetns = base.HeadElements();
+            foreach (var item in _items)
+                headElemetns.AddRange(item.HeadElements());
+            return headElemetns;
+        }
     }
 }
