@@ -22,9 +22,9 @@ namespace ProjectOne
                     item.AppLink = app.AppPrefix;
                     Add(item);
                 }
-                catch (Exception)
+                catch (Exception e)
                 {
-                    PoLogger.Log(PoLogSource.Default, PoLogType.Error, "Could not load app icon: " + app.Name);
+                    PoLogger.Log(PoLogSource.Default, PoLogType.Error, "Could not load app icon: " + app.Name + ". Exception: " + e.Message);
                 }
             }
             IsLoaded = true;

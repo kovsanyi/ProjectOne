@@ -6,8 +6,15 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Resource\Icon\DesktopIcon_NotFound.svg" />
-    <None Remove="Server\GUI\Component\_Model\JS\Main.js" />
+    <None Remove="Common\Resource\Icon\App\exit.svg" />
+    <None Remove="Common\Resource\Icon\App\flag.svg" />
+    <None Remove="Common\Resource\Icon\App\send.svg" />
+    <None Remove="Common\Resource\Icon\App\user.svg" />
+    <None Remove="Common\Resource\Icon\App\users.svg" />
+    <None Remove="Common\Resource\Icon\DesktopIcon_NotFound.svg" />
+    <None Remove="Common\Resource\Icon\home.svg" />
+    <None Remove="Common\Resource\Icon\settings.svg" />
+    <None Remove="Server\GUI\Component\_Base\_Model\JS\Main.js" />
     <None Remove="Server\RequestFilter\Desktop\UI\CSS\Desktop.css" />
     <None Remove="Server\RequestFilter\Desktop\UI\Taskbar\Resource\rocket.svg" />
     <None Remove="Server\RequestFilter\Desktop\UI\Taskbar\Resource\rocket_hover.svg" />
@@ -17,8 +24,15 @@
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Include="Resource\Icon\DesktopIcon_NotFound.svg" />
-    <EmbeddedResource Include="Server\GUI\Component\_Model\JS\Main.js" />
+    <EmbeddedResource Include="Common\Resource\Icon\App\exit.svg" />
+    <EmbeddedResource Include="Common\Resource\Icon\App\flag.svg" />
+    <EmbeddedResource Include="Common\Resource\Icon\App\send.svg" />
+    <EmbeddedResource Include="Common\Resource\Icon\App\user.svg" />
+    <EmbeddedResource Include="Common\Resource\Icon\App\users.svg" />
+    <EmbeddedResource Include="Common\Resource\Icon\Desktop\Desktop_NotFound.svg" />
+    <EmbeddedResource Include="Common\Resource\Icon\App\home.svg" />
+    <EmbeddedResource Include="Common\Resource\Icon\App\settings.svg" />
+    <EmbeddedResource Include="Server\GUI\Component\_Base\_Model\JS\Main.js" />
     <EmbeddedResource Include="Server\RequestFilter\Desktop\UI\CSS\Desktop.css" />
     <EmbeddedResource Include="Server\RequestFilter\Desktop\UI\Taskbar\Resource\rocket.svg" />
     <EmbeddedResource Include="Server\RequestFilter\Desktop\UI\Taskbar\Resource\rocket_hover.svg" />
@@ -28,7 +42,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Server\GUI\Component\Input\TextBox\" />
+    <Folder Include="Server\GUI\Component\_Base\Input\TextBox\" />
   </ItemGroup>
 
 </Project>

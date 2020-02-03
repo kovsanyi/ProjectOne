@@ -20,7 +20,6 @@ namespace ProjectOne
             set { _appIcon = value; SetValue(); }
         }
 
-
         string _appName;
         public string AppName
         {

@@ -6,6 +6,6 @@ namespace ProjectOne
 {
     public class PoIcon_ChatServer
     {
-        public static string DektopIcon = "data-complexity.svg";
+        public const string DektopIcon = "data-complexity.svg";
     }
 }

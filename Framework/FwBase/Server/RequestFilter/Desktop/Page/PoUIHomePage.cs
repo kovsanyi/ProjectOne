@@ -9,7 +9,7 @@ namespace ProjectOne
         protected override List<PoUIHeadElement> HeadElements()
         {
             var list = base.HeadElements();
-            list.Add(new PoUIHeadElementCSS("/resource/Desktop.css"));
+            //list.Add(new PoUIHeadElementCSS("/resource/Desktop.css"));
             return list;
         }
         public PoUIHomePage()

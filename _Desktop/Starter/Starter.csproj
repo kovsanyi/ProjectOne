@@ -1,0 +1,21 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <RootNamespace>ProjectOne</RootNamespace>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Apps\AppChatClient\AppChatClient.csproj" />
+    <ProjectReference Include="..\..\Apps\AppChatServer\AppChatServer.csproj" />
+    <ProjectReference Include="..\..\Framework\FwBase\FwBase.csproj" />
+    <ProjectReference Include="..\..\Framework\FwBootloader\FwBootloader.csproj" />
+    <ProjectReference Include="..\..\Framework\FwUI\FwUI.csproj" />
+  </ItemGroup>
+
+</Project>

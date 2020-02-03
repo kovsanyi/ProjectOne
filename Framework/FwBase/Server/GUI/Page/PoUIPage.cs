@@ -30,6 +30,7 @@ namespace ProjectOne
         protected virtual List<PoUIHeadElement> HeadElements()
         {
             var headElements = new List<PoUIHeadElement>();
+            headElements.Add(new PoUIHeadElementCSS("/resource/Desktop.css"));
             return headElements;
         }
 

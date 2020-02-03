@@ -27,7 +27,8 @@ namespace ProjectOne
             }
             catch (Exception e)
             {
-                PoLogger.Log(PoLogSource.Default, PoLogType.Error, "Could not instantiate request filer: " + filterType.Name + ". Exception: " + e.Message);
+                PoLogger.Log(PoLogSource.Default, PoLogType.Error,
+                    "Could not instantiate request filer: " + filterType.Name + ". Exception: " + e.Message);
             }
         }
     }

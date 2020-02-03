@@ -36,7 +36,7 @@ namespace ProjectOne
                 }
                 context.Response.Close();
             }
-            catch (ObjectDisposedException e) { }
+            catch (ObjectDisposedException) { }
         }
     }
 }

@@ -29,7 +29,7 @@ namespace ProjectOne
 
         private PoUIDesktop()
         {
-            Model.Class = "desktop";
+            AddClass("desktop");
         }
     }
 }

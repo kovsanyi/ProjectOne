@@ -27,17 +27,29 @@ namespace ProjectOne
             }
         }
 
+        //DEBUG
+        PoUILayout _icons;
         private PoUITaskbar()
         {
-            var icons = CreateIconsLeft();
-            var appsOpened = CreateIconsAppsOpened();
-            var serverClock = CreateIconsServerClock();
-            if (icons != null) Add(icons);
-            if (appsOpened != null) Add(appsOpened);
-            if (serverClock != null) Add(serverClock);
+            _appItems = new List<PoUITaskBarAppItem>();
+            createTaskBar();
 
             ID = "taskbar";
-            Model.Class = "taskbar";
+            AddClass("taskbar");
+        }
+
+        void createTaskBar()
+        {
+            Clear();
+            _icons = new PoUILayout();
+            _icons.AddClass("icons");
+            var icons = CreateStartMenu();
+            var appsOpened = CreateIconsAppsOpened();
+            var serverClock = CreateIconsServerClock();
+            if (icons != null) _icons.Add(icons);
+            if (appsOpened != null) _icons.Add(appsOpened);
+            if (serverClock != null) _icons.Add(serverClock);
+            Add(_icons);
         }
     }
 }

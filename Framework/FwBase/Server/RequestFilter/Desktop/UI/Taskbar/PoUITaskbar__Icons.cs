@@ -6,28 +6,27 @@ namespace ProjectOne
 {
     partial class PoUITaskbar
     {
-        protected PoUIComponent CreateIconsLeft()
+        protected PoUIComponent CreateStartMenu()
         {
             var a = new PoUIHyperlink();
+            a.AddClass("start-menu");
             var model = (PoUIModelHyperlink)a.Model;
             model.Href = "#start-menu";
-            model.Class = "start-menu";
 
             var iconsLeft = new PoUILayout();
-            iconsLeft.Model.Class = "icons-left";
+            iconsLeft.AddClass("icons-left");
             iconsLeft.Add(a);
 
-            var icons = new PoUILayout();
-            icons.Model.Class = "icons";
-            icons.Add(iconsLeft);
-
-            return icons;
+            return iconsLeft;
         }
 
         protected PoUIComponent CreateIconsAppsOpened()
         {
-            PoUIComponent ret = null;
-            return ret;
+            var appItems = new PoUILayout();
+            appItems.AddClass("icons-app");
+            foreach (var item in _appItems)
+                appItems.Add(item);
+            return appItems;
         }
 
         protected PoUIComponent CreateIconsServerClock()

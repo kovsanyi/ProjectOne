@@ -8,7 +8,7 @@ namespace ProjectOne
     {
         public PoUIDesktopIcon()
         {
-            Model.Class = "desktop-item";
+            AddClass("desktop-item");
         }
 
         protected void SetValue()
@@ -17,7 +17,7 @@ namespace ProjectOne
             sb.AppendLine(GetIconAsHtml());
             sb.AppendLine("<span>" + AppName + "</span>");
             var model = (PoUIModelHyperlink)Model;
-            model.Href = AppLink;
+            model.Href = "/?App=" + AppLink;
             Value = sb.ToString();
         }
 

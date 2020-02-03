@@ -15,7 +15,6 @@ namespace ProjectOne
             var appType = typeof(IPoApp);
             var assemblies = AppDomain.CurrentDomain.GetAssemblies();
             var types = assemblies.Select(x => x.GetTypes()).SelectMany(x => x).Where(t => t.IsClass && appType.IsAssignableFrom(t));
-            //var types = Assembly.GetAssembly(appType).GetTypes().Where(t => t.IsClass && t.IsSubclassOf(appType));
             AppsMapped = new Dictionary<string, IPoApp>(types.Count());
             foreach (var t in types)
             {
