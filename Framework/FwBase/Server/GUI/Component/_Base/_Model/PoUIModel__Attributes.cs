@@ -12,16 +12,16 @@ namespace ProjectOne
         public string DropZone;
         public string ID;
         public string Lang;
-        public string Style;
+        //public string Style;
         public string Title;
         public int TabIndex;
         public bool ContentEditable;
-        public bool Dragable;
+        public bool Draggable;
         public bool Hidden;
         public bool SpellCheck;
         public bool Translate;
 
-        public virtual string CreateAttributes()
+        protected virtual string CreateAttributes()
         {
             var ret = "" +
                 CreateAttribute("accesskey", AccessKey) +
@@ -30,11 +30,11 @@ namespace ProjectOne
                 CreateAttribute("dropzone", DropZone) +
                 CreateAttribute("id", ID) +
                 CreateAttribute("lang", Lang) +
-                CreateAttribute("style", Style) +
+                //CreateAttribute("style", Style) +
                 CreateAttribute("title", Title) +
                 (TabIndex > -1 ? CreateAttribute("tabindex", TabIndex.ToString()) : "") +
                 (ContentEditable ? CreateAttribute("contenteditable", "true") : "") +
-                (Dragable ? CreateAttribute("draggable", "true") : "") +
+                (Draggable ? CreateAttribute("draggable", "true") : "") +
                 (Hidden ? "hidden" : "") +
                 (SpellCheck ? CreateAttribute("spellcheck", "true") : "") +
                 (Translate ? "" : CreateAttribute("translate", "no"));

@@ -21,7 +21,7 @@ namespace ProjectOne
             Tag = "img";
         }
 
-        public override string CreateAttributes()
+        protected override string CreateAttributes()
         {
             var ret = base.CreateAttributes() +
                 CreateAttribute("alt", AlternateText) +

@@ -4,7 +4,7 @@ using System.Text;
 
 namespace ProjectOne
 {
-    partial class PoUIComponent
+    partial class PoUIComponent<T>
     {
         readonly object _sync = new object();
         bool IsDisposed;

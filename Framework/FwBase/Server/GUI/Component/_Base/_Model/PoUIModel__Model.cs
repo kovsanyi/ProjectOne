@@ -6,21 +6,22 @@ namespace ProjectOne
 {
     partial class PoUIModel
     {
-        public string Model
-        {
-            get
-            {
-                var ret = CreateModel();
-                return ret;
-            }
-        }
+        //public string CreateModel()
+        //{
+        //    var attributes = CreateAttributes();
+        //    var eventAttributes = string.Empty;
+        //    if (Scipt != null) eventAttributes = Scipt.CreateScript();
+        //    var ret = $"<{Tag ?? ""}{attributes}{eventAttributes}>{ValueBetweenTags ?? ""}</{Tag ?? ""}>";
+        //    return ret;
+        //}
 
-        public virtual string CreateModel()
+        public string CreateModel(string script, string style)
         {
+            if (string.IsNullOrWhiteSpace(Tag)) return string.Empty;
             var attributes = CreateAttributes();
-            var eventAttributes = string.Empty;
-            if (Events != null) eventAttributes = Events.CreateScipts();
-            var ret = $"<{Tag ?? ""}{attributes}{eventAttributes}>{ValueBetweenTags ?? ""}</{Tag ?? ""}>";
+            script = string.IsNullOrWhiteSpace(script) ? string.Empty : script;
+            style = string.IsNullOrWhiteSpace(style) ? string.Empty : CreateAttribute("style", style);
+            var ret = $"<{Tag} {attributes} {style} {script}>{ValueBetweenTags ?? string.Empty}</{Tag}>";
             return ret;
         }
     }

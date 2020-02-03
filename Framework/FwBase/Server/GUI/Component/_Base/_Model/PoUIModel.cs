@@ -4,11 +4,11 @@ using System.Text;
 
 namespace ProjectOne
 {
-    public partial class PoUIModel
+    public abstract partial class PoUIModel : IPoUIModel
     {
         public PoUIEvents Events;
 
-        public string Tag;
+        protected string Tag;
         public string ValueBetweenTags;
 
         public PoUIModel()

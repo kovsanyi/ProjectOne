@@ -4,7 +4,7 @@ using System.Text;
 
 namespace ProjectOne
 {
-    public class PoUIModelInput : PoUIModel
+    public /*abstract*/ class PoUIModelInput : PoUIModel
     {
         public string Accept;
         public string Alt;
@@ -42,7 +42,7 @@ namespace ProjectOne
 
         }
 
-        public override string CreateAttributes()
+        protected override string CreateAttributes()
         {
             var ret = base.CreateAttributes() + "" +
                 CreateAttribute("accept", Accept) +

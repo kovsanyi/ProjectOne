@@ -4,8 +4,8 @@ using System.Text;
 
 namespace ProjectOne
 {
-    partial class PoUIEvents
+    public interface IPoUIModel
     {
-        public event EventHandler OnClick;
+        string CreateModel(string script, string style);
     }
 }

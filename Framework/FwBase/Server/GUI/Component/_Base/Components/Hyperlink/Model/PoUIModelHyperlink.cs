@@ -16,7 +16,12 @@ namespace ProjectOne
         public string Target;
         public string Type;
 
-        public override string CreateAttributes()
+        public PoUIModelHyperlink()
+        {
+            Tag = "a";
+        }
+
+        protected override string CreateAttributes()
         {
             var ret = base.CreateAttributes() + "" +
                 CreateAttribute("download", Download) +

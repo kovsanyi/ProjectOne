@@ -10,8 +10,7 @@ namespace ProjectOne
         {
             var a = new PoUIHyperlink();
             a.AddClass("start-menu");
-            var model = (PoUIModelHyperlink)a.Model;
-            model.Href = "#start-menu";
+            a.Model.Href = "#start-menu";
 
             var iconsLeft = new PoUILayout();
             iconsLeft.AddClass("icons-left");

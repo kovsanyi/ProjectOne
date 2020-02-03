@@ -6,14 +6,13 @@ using System.Text;
 
 namespace ProjectOne
 {
-    public partial class PoUILayout : PoUIComponent
+    public partial class PoUILayout : PoUIComponent<PoUIModelConfigurable>
     {
         List<PoUIComponent> _items;
 
         public PoUILayout()
         {
-            Model = new PoUIModel();
-            Model.Tag = "div";
+            Model.Configure("div");
             _items = new List<PoUIComponent>();
         }
 

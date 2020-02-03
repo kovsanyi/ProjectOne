@@ -4,11 +4,11 @@ using System.Text;
 
 namespace ProjectOne
 {
-    public class PoUIInput : PoUIComponent
+    public class PoUIInput : PoUIComponent<PoUIModelInput>
     {
-        public PoUIInput()
+        public PoUIInput() : base()
         {
-            Model = new PoUIModelInput();
+
         }
     }
 }

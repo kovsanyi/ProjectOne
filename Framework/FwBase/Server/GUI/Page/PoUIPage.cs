@@ -114,7 +114,7 @@ namespace ProjectOne
 
         protected string GetBody()
         {
-            var ret = Body?.ToHTML() ?? string.Empty;
+            var ret = Body?.ToHtml() ?? string.Empty;
             return ret;
         }
     }

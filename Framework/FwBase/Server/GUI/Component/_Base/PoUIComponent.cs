@@ -4,15 +4,10 @@ using System.Text;
 
 namespace ProjectOne
 {
-    public partial class PoUIComponent
+    public abstract partial class PoUIComponent<T> : PoUIComponent where T : PoUIModel, new()
     {
-        public PoUIModel Model;
-        public PoUIEvents Events
-        {
-            get { return Model?.Events; }
-        }
+        public T Model;
 
-        protected bool IsDirty;
         public string Value
         {
             get { return Model.ValueBetweenTags; }
@@ -21,6 +16,11 @@ namespace ProjectOne
                 IsDirty = true;
                 Model.ValueBetweenTags = value;
             }
+        }
+
+        public PoUIComponent()
+        {
+            Model = new T();
         }
 
         public string ID
@@ -34,34 +34,41 @@ namespace ProjectOne
             set { Model.ID = value; }
         }
 
+        public override string ToHtml()
+        {
+            var script = Scipt.CreateScript();
+            var style = Style.CreateStyle();
+            var html = Model.CreateModel(script, style);
+            return html;
+        }
+    }
+
+    public abstract class PoUIComponent
+    {
+        public PoUIEvents Scipt;
+        public PoUIStyle Style;
+
+        public PoUIComponent()
+        {
+            Scipt = new PoUIEvents();
+            Style = new PoUIStyle();
+        }
+
         public virtual List<PoUIHeadElement> HeadElements()
         {
             var headElements = new List<PoUIHeadElement>();
             return headElements;
         }
 
-        public PoUIComponent() { }
-
-        public void AddClass(string className)
-        {
-            Model.Class += " " + className;
-        }
-
-        public void RemoveClass(string className)
-        {
-            if (Model.Class == null || !Model.Class.Contains(className)) return;
-            className = className.Replace(className + " ", string.Empty);
-        }
-
+        protected bool IsDirty;
         protected void Refresh()
         {
             IsDirty = true;
         }
 
-        public virtual string ToHTML()
+        public virtual string ToHtml()
         {
-            var ret = Model.Model;
-            return ret;
+            return string.Empty;
         }
     }
 }

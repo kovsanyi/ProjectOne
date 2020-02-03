@@ -4,11 +4,11 @@ using System.Text;
 
 namespace ProjectOne
 {
-    public partial class PoUIImage : PoUIComponent
+    public partial class PoUIImage : PoUIComponent<PoUIModelImage>
     {
-        public PoUIImage()
+        public PoUIImage() : base()
         {
-            Model = new PoUIModelImage();
+
         }
     }
 }

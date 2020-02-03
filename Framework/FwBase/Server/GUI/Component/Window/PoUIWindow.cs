@@ -29,13 +29,13 @@ namespace ProjectOne
         {
             var minimize = new PoUIHyperlink();
             minimize.AddClass("window-form-button");
-            minimize.Events.InitScript(PoUIEventType.OnClick);
-            minimize.Events.OnClick += Events_OnClickMinimize;
+            minimize.Scipt.InitScript(PoUIEventType.OnClick);
+            minimize.Scipt.OnClick += SciptOnClickMinimize;
 
             var close = new PoUIHyperlink();
             close.AddClass("window-form-button");
-            close.Events.InitScript(PoUIEventType.OnClick);
-            close.Events.OnClick += Events_OnClickClose;
+            close.Scipt.InitScript(PoUIEventType.OnClick);
+            close.Scipt.OnClick += SciptOnClickClose;
             close.Value = "x";
 
             var header = new PoUILayout();
@@ -45,12 +45,12 @@ namespace ProjectOne
             return header;
         }
 
-        private void Events_OnClickMinimize(object sender, EventArgs e)
+        private void SciptOnClickMinimize(object sender, EventArgs e)
         {
             CallOnMinimalize();
         }
 
-        private void Events_OnClickClose(object sender, EventArgs e)
+        private void SciptOnClickClose(object sender, EventArgs e)
         {
             CallOnClosed();
         }

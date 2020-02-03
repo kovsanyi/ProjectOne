@@ -13,7 +13,7 @@ namespace ProjectOne
             Scripts = new Dictionary<PoUIEventType, string>();
         }
 
-        public virtual string CreateScipts()
+        public virtual string CreateScript()
         {
             if (Scripts == null || Scripts.Count == 0) return string.Empty;
             var sb = new StringBuilder();
@@ -51,7 +51,7 @@ namespace ProjectOne
                 Scripts.Remove(scriptType);
                 PoLogger.Log(PoLogSource.Default, PoLogType.Warn, "Script replaced using InitScript(PoUIScriptType) method: " + scriptType.ToString());
             }
-            Scripts.Add(scriptType, $"clientAction(this, '{scriptType.ToString().ToLowerInvariant()}')");
+            Scripts.Add(scriptType, $"call{nameof(scriptType)}(this)");
         }
     }
 }

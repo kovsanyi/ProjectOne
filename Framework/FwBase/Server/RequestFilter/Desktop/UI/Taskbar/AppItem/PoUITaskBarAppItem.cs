@@ -9,7 +9,7 @@ namespace ProjectOne
         public PoUITaskBarAppItem()
         {
             AddClass("app");
-            ((PoUIModelHyperlink)Model).Href = "#app";
+            Model.Href = "#app";
         }
 
         protected void SetValue()
@@ -17,18 +17,16 @@ namespace ProjectOne
             var sb = new StringBuilder();
             sb.AppendLine(GetIconAsHtml());
             sb.AppendLine("<span>" + AppName + "</span>");
-            var model = (PoUIModelHyperlink)Model;
-            //model.Href = AppLink;
+            //Model.Href = AppLink;
             Value = sb.ToString();
         }
 
         protected string GetIconAsHtml()
         {
             var icon = new PoUIImage();
-            var iconModel = (PoUIModelImage)icon.Model;
-            iconModel.Source = "/resource/" + AppIcon;
-            iconModel.Width = "25px";
-            var ret = icon.Model.Model;
+            icon.Model.Source = "/resource/" + AppIcon;
+            icon.Model.Width = "25px";
+            var ret = icon.ToHtml();
             return ret;
         }
     }
