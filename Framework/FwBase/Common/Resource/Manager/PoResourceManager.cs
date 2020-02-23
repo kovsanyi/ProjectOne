@@ -32,8 +32,7 @@ namespace ProjectOne
             //var resNameLower = resName.ToLowerInvariant();
             var res = ResourcesMapped
                 //.Select(x => x.ToLowerInvariant())
-                .Where(x => x.Key.EndsWith(resName))
-                .FirstOrDefault();
+                .FirstOrDefault(x => x.Key.ToLowerInvariant().EndsWith(resName.ToLowerInvariant()));
             if (res.Key == null || res.Value == null) return false;
             //if (res == default(KeyValuePair<string, Assembly>)) return false;
             using (var stream = res.Value.GetManifestResourceStream(res.Key))

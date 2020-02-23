@@ -15,12 +15,13 @@
     <None Remove="Common\Resource\Icon\home.svg" />
     <None Remove="Common\Resource\Icon\settings.svg" />
     <None Remove="Server\GUI\Component\_Base\_Events\JS\Main.js" />
-    <None Remove="Server\RequestFilter\Desktop\UI\CSS\Desktop.css" />
-    <None Remove="Server\RequestFilter\Desktop\UI\Taskbar\Resource\rocket.svg" />
-    <None Remove="Server\RequestFilter\Desktop\UI\Taskbar\Resource\rocket_hover.svg" />
+    <None Remove="Server\GUI\Component\Desktop\CSS\Desktop.css" />
+    <None Remove="Server\GUI\Component\Taskbar\Resource\rocket.svg" />
+    <None Remove="Server\GUI\Component\Taskbar\Resource\rocket_hover.svg" />
+    <None Remove="Server\Resource\Bootstrap\bootstrap.css" />
+    <None Remove="Server\Resource\Bootstrap\bootstrap.min.css" />
     <None Remove="Server\Resource\jQuery\jquery-3.4.1.js" />
     <None Remove="Server\Resource\jQuery\jquery-3.4.1.min.js" />
-    <None Remove="Server\Resource\login.html" />
   </ItemGroup>
 
   <ItemGroup>
@@ -33,12 +34,13 @@
     <EmbeddedResource Include="Common\Resource\Icon\App\home.svg" />
     <EmbeddedResource Include="Common\Resource\Icon\App\settings.svg" />
     <EmbeddedResource Include="Server\GUI\Component\_Base\_Events\JS\Main.js" />
-    <EmbeddedResource Include="Server\RequestFilter\Desktop\UI\CSS\Desktop.css" />
-    <EmbeddedResource Include="Server\RequestFilter\Desktop\UI\Taskbar\Resource\rocket.svg" />
-    <EmbeddedResource Include="Server\RequestFilter\Desktop\UI\Taskbar\Resource\rocket_hover.svg" />
+    <EmbeddedResource Include="Server\GUI\Component\Desktop\CSS\Desktop.css" />
+    <EmbeddedResource Include="Server\GUI\Component\Taskbar\Resource\rocket.svg" />
+    <EmbeddedResource Include="Server\GUI\Component\Taskbar\Resource\rocket_hover.svg" />
+    <EmbeddedResource Include="Server\Resource\Bootstrap\bootstrap.css" />
+    <EmbeddedResource Include="Server\Resource\Bootstrap\bootstrap.min.css" />
     <EmbeddedResource Include="Server\Resource\jQuery\jquery-3.4.1.js" />
     <EmbeddedResource Include="Server\Resource\jQuery\jquery-3.4.1.min.js" />
-    <EmbeddedResource Include="Server\Resource\login.html" />
   </ItemGroup>
 
   <ItemGroup>

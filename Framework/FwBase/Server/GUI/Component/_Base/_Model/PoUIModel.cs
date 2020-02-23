@@ -6,8 +6,6 @@ namespace ProjectOne
 {
     public abstract partial class PoUIModel : IPoUIModel
     {
-        public PoUIEvents Events;
-
         protected string Tag;
         public string ValueBetweenTags;
 
@@ -15,12 +13,6 @@ namespace ProjectOne
         {
             TabIndex = -1;
             Translate = true;
-            InitEventAttributes();
-        }
-
-        public virtual void InitEventAttributes()
-        {
-            Events = new PoUIEvents();
         }
     }
 }

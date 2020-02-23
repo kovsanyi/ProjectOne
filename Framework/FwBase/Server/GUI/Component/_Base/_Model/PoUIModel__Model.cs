@@ -6,15 +6,6 @@ namespace ProjectOne
 {
     partial class PoUIModel
     {
-        //public string CreateModel()
-        //{
-        //    var attributes = CreateAttributes();
-        //    var eventAttributes = string.Empty;
-        //    if (Scipt != null) eventAttributes = Scipt.CreateScript();
-        //    var ret = $"<{Tag ?? ""}{attributes}{eventAttributes}>{ValueBetweenTags ?? ""}</{Tag ?? ""}>";
-        //    return ret;
-        //}
-
         public string CreateModel(string script, string style)
         {
             if (string.IsNullOrWhiteSpace(Tag)) return string.Empty;

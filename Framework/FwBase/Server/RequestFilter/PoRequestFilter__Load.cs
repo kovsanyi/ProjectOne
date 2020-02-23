@@ -15,7 +15,9 @@ namespace ProjectOne
                 .SelectMany(x => x.GetTypes())
                 .Where(x => x.IsClass && x != tc && ti.IsAssignableFrom(x));
             foreach (var filterT in filterTypes)
+            {
                 RegisterFilter(filterT);
+            }
         }
 
         protected void RegisterFilter(Type filterType)

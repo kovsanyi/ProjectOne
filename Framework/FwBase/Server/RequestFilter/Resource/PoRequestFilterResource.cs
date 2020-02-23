@@ -10,31 +10,30 @@ namespace ProjectOne
     {
         public bool ProcessRequest(PoHttpContext context)
         {
-            var decoded = HttpUtility.UrlDecode(context.Request.RawUrl);
-            var url = decoded.TrimStart('/');
-            if (!url.StartsWith("resource/")) return false;
-            var resName = url.Remove(0, "resource/".Length);
-            if (!PoResourceManager.Instance.TryGetResource(resName, out var resBytes)) return false;
-            SetContentType(context, resName);
+            var path = context.Request.Url.AbsolutePath.ToLowerInvariant();
+            if (!path.StartsWith("/resource/")) return false;
+            var resourceName = path.Substring("/resource/".Length);
+            if (!PoResourceManager.Instance.TryGetResource(resourceName, out var resBytes)) return false;
+            SetContentType(context, resourceName);
             context.Response.AddHeader("Cache-Control", "max-age=120");
-            context.Response.SendChunked = true;
-            context.Response.OutputStream.Write(resBytes, 0, resBytes.Length);
+            context.Response.WriteBytesToOutput(resBytes);
+            context.Response.SendSuccess();
             return true;
         }
 
-        protected void SetContentType(PoHttpContext context, string resName)
+        protected void SetContentType(PoHttpContext context, string resourceName)
         {
-            if (SetContentType(context, resName, "text/css", ".css")) return;
-            if (SetContentType(context, resName, "text/html", ".html")) return;
-            if (SetContentType(context, resName, "text/javascript", ".js")) return;
-            if (SetContentType(context, resName, "image/svg+xml", ".svg")) return;
-            PoLogger.Log(PoLogSource.Default, PoLogType.Warn, "Could not set content type for resource: " + resName);
+            if (SetContentType(context, resourceName, "text/css", ".css")) return;
+            if (SetContentType(context, resourceName, "text/html", ".html")) return;
+            if (SetContentType(context, resourceName, "text/javascript", ".js")) return;
+            if (SetContentType(context, resourceName, "image/svg+xml", ".svg")) return;
+            PoLogger.Log(PoLogSource.Default, PoLogType.Warn, $"Could not set content type for resource '{resourceName}'");
         }
 
-        protected bool SetContentType(PoHttpContext context, string resName, string contentType, string extension)
+        protected bool SetContentType(PoHttpContext context, string resourceName, string contentType, string extension)
         {
-            if (!resName.EndsWith(extension)) return false;
-            context.Response.ContentType = contentType;
+            if (!resourceName.EndsWith(extension)) return false;
+            context.Response.SetContentType(contentType);
             return true;
         }
     }

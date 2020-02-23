@@ -4,7 +4,7 @@ using System.Text;
 
 namespace ProjectOne
 {
-    public enum PoLogType
+    public enum PoLogType : byte
     {
         Trace,
         Debug,

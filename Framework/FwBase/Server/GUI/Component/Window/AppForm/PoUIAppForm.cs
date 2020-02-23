@@ -17,7 +17,7 @@ namespace ProjectOne
             return headElements;
         }
 
-        public PoUIAppForm(IPoApp app, string pageName)
+        public PoUIAppForm(IPoApp app, string pageName) : base(app.Name, app.Icon)
         {
             var toolbar = createToolbar(app);
             var page = createPage(app, pageName);

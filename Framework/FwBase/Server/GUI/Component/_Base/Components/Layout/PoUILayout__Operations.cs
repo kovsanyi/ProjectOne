@@ -11,16 +11,26 @@ namespace ProjectOne
         {
             if (item == null) return;
             _items.Add(item);
-            var htmlList = _items.Select(x => x.ToHtml());
-            Value = htmlList.Aggregate((x, y) => x + y);
-            //IsDirty = true;
+            Refresh();
         }
 
         public void Clear()
         {
             _items.Clear();
             Value = string.Empty;
-            //IsDirty = true;
+            Refresh();
+        }
+
+        public override string ToHtml()
+        {
+            var sb = new StringBuilder();
+            foreach (var item in _items)
+            {
+                sb.Append(item.ToHtml());
+            }
+
+            Value = sb.ToString();
+            return base.ToHtml();
         }
     }
 }

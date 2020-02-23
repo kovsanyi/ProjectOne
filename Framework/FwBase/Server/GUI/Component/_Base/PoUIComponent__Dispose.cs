@@ -6,23 +6,10 @@ namespace ProjectOne
 {
     partial class PoUIComponent<T>
     {
-        readonly object _sync = new object();
-        bool IsDisposed;
-
-        public void Dispose()
+        protected override void DisposeContent()
         {
-            if (IsDisposed) return;
-            lock (_sync)
-            {
-                if (IsDisposed) return;
-                DisposeContent();
-            }
-        }
-
-        protected virtual void DisposeContent()
-        {
-            if (Model == null) return;
             Model = null;
+            base.DisposeContent();
         }
     }
 }
