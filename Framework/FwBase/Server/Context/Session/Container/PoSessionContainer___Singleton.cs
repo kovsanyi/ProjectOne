@@ -10,5 +10,6 @@ namespace ProjectOne
             = new Lazy<PoSessionContainer>(() => new PoSessionContainer());
 
         public static PoSessionContainer Instance => Lazy.Value;
+
     }
 }

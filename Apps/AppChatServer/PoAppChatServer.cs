@@ -8,8 +8,14 @@ namespace ProjectOne
 
         public void CallOnClosed() { }
 
-        public void CallOnStarted() { }
+        public void CallOnStarted()
+        {
+            //PoChatServer.Instance.Start();
+        }
 
-        public void CallOnStopped() { }
+        public void CallOnStopped()
+        {
+            //PoChatServer.Instance.Stop();
+        }
     }
 }

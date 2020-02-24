@@ -14,7 +14,7 @@ namespace ProjectOne
         private readonly ConcurrentDictionary<string, PoUITaskbar> _sessionTaskbar;
         private readonly ConcurrentDictionary<string, ConcurrentDictionary<string, PoUIComponent>> _sessionPages;
 
-        public PoSessionContainer()
+        private PoSessionContainer()
         {
             _sessionTaskbar = new ConcurrentDictionary<string, PoUITaskbar>();
             _sessionPages = new ConcurrentDictionary<string, ConcurrentDictionary<string, PoUIComponent>>();
