@@ -28,6 +28,7 @@ namespace ProjectOne
             //wrapper.Add(Content2);
 
             Content = wrapper;
+            var tostr = ToHtml();
         }
     }
 }

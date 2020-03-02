@@ -9,6 +9,24 @@
   box-sizing: border-box;
 }
 
+/* ##################### Layout ##################### */
+
+.div-vertical{
+	
+}
+
+.div-horizontal {
+	display: inline-flex;
+}
+
+.div-vertical-item {
+	
+}
+
+.div-horizontal-item {
+	
+}
+
 /* ##################### Desktop ##################### */
 
 .desktop{

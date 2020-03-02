@@ -7,9 +7,9 @@ namespace ProjectOne
 {
     public abstract partial class PoItemManager<T> where T : PoManagedItem
     {
-        List<T> _items;
+        private readonly List<T> _items;
 
-        public PoItemManager()
+        protected PoItemManager()
         {
             _items = new List<T>();
         }

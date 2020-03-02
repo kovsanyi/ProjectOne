@@ -21,10 +21,12 @@ namespace ProjectOne
             var itemExists = GetItems().FirstOrDefault(x => x.ID == item.ID);
             if (itemExists != null)
             {
-                PoLogger.Log(PoLogSource.Default, PoLogType.Warn, $"Item cannot be added to manager because it is already exists: {item.ToString()}");
+                PoLogger.Log(PoLogSource.Default, PoLogType.Warn,
+                    $"Item cannot be added to manager because it is already exists: {item.ToString()}");
                 return;
             }
             _items.Add(item);
+            CallOnItemAdded(item);
             SerializeItem(item);
         }
 
@@ -34,9 +36,11 @@ namespace ProjectOne
             var itemExists = GetItems().FirstOrDefault(x => x.ID == item.ID);
             if (itemExists == null)
             {
-                PoLogger.Log(PoLogSource.Default, PoLogType.Warn, $"Item cannot be updated in manager because it is not exists: {item.ToString()}");
+                PoLogger.Log(PoLogSource.Default, PoLogType.Warn,
+                    $"Item cannot be updated in manager because it is not exists: {item.ToString()}");
                 return;
             }
+            CallOnItemUpdated(item);
             SerializeItem(item);
         }
 
@@ -46,6 +50,7 @@ namespace ProjectOne
             var itemExists = GetItems().FirstOrDefault(x => x.ID == item.ID);
             if (itemExists == null) return;
             _items.Remove(item);
+            CallOnItemDeleted(item);
             RemoveItemFromPersistence(item);
         }
 
@@ -69,7 +74,8 @@ namespace ProjectOne
             }
             catch (Exception e)
             {
-                PoLogger.LogException(PoLogSource.Default, e, $"Cannot delete item {nameof(T)} from persistence store.");
+                PoLogger.LogException(PoLogSource.Default, e,
+                    $"Cannot delete item {nameof(T)} from persistence store.");
             }
         }
     }

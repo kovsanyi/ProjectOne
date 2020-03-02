@@ -23,13 +23,16 @@ namespace ProjectOne
             return headElements;
         }
 
-        protected bool IsDirty;
-        protected void Refresh()
+        public DateTime LastUpdated = DateTime.Now;
+        public bool IsDirty;
+        public void Refresh()
         {
             IsDirty = true;
+            LastUpdated = DateTime.Now;
         }
 
         private readonly object _sync = new object();
+        public bool IsDisposed => _isDisposed;
         private bool _isDisposed = false;
 
         public void Dispose()
@@ -47,6 +50,12 @@ namespace ProjectOne
         public virtual string ToHtml()
         {
             return string.Empty;
+        }
+
+        protected string CreateResourceStr(string resource)
+        {
+            var ret = $"/resource/{resource}";
+            return ret;
         }
     }
 }

@@ -5,7 +5,7 @@ using System.Text;
 
 namespace ProjectOne
 {
-    partial class PoUILayout : IEnumerable<PoUIComponent>, IEnumerable
+    partial class PoUILayout : IEnumerable<PoUIComponent>
     {
         public IEnumerator<PoUIComponent> GetEnumerator()
         {

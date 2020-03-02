@@ -16,14 +16,21 @@ function OnMouseUp(sender) { invokeEvent(sender, "OnMouseUp"); }
 
 function OnWheel(sender) { invokeEvent(sender, "OnWheel"); }
 
+function OnBlur(sender) { invokeEvent(sender, "OnBlur"); }
+
 /* ##################### Engine ##################### */
 
 function invokeEvent(sender, eventType) {
-	var url = "invokeEvent?SenderId=" + sender.id + "&EventType=" + eventType;
-	$.get(url,
-		function(data) {
-			refreshContent(data);
-		});
+	var data = "InvokeEvent&EventType=" + eventType;
+	clientAction(sender, data);
+}
+
+function clientAction(sender, data) {
+	var url = window.location.href + "&ClientAction=" + data + "&SenderValue=" + sender.value + "&SenderId=" + sender.id;
+	var urlEncoded = encodeURI(url);
+	$.get(urlEncoded, function(dataReceived, status) {
+		refreshContent(JSON.parse(dataReceived));
+	});
 }
 
 function refreshContent(data) {
@@ -35,7 +42,7 @@ function refreshContent(data) {
 	if (!data.Modified) {
         console.log("Nothing to change.");
 	}
-	data.Elements.forEach(x => refreshContent(x));
+	data.Elements.forEach(x => refreshComponent(x));
 }
 
 function refreshComponent(data) {
@@ -44,12 +51,5 @@ function refreshComponent(data) {
 		console.warn("Cannot refresh component. Cannot find component with ID=" + data.ComponentId);
 		return;
 	}
-	item.value = data.HtmlContent;
-}
-
-function clientAction(sender, eventType) {
-	var url = "clientAction?id=" + sender.id + concat("&eventType=").concat(eventType);
-    $.get(url, function(data, status){
-       alert("Data: " + data + "\nStatus: " + status);
-    });
+	$(element).replaceWith(data.HtmlContent);
 }

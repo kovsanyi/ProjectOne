@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace ProjectOne
@@ -50,16 +51,14 @@ namespace ProjectOne
 
         private string GetHeadElements()
         {
-            var headElements = HeadElements();
-            if (headElements == null || headElements.Count == 0) return string.Empty;
+            var headElements = HeadElements()
+                .Select(x => x.ToHTML())
+                .ToList();
+            if (headElements.Count == 0) return string.Empty;
+            headElements = headElements.Distinct().ToList();
             var sb = new StringBuilder();
-            foreach (var he in headElements)
-            {
-                var attr = he.ToHTML();
-                sb.AppendLine(attr);
-            }
-            var ret = sb.ToString();
-            return ret;
+            headElements.ForEach(x => sb.AppendLine(x));
+            return sb.ToString();
         }
 
         private string GetHeadElementsBase()

@@ -4,9 +4,9 @@ using System.Text;
 
 namespace ProjectOne
 {
-    public class PoUIInput : PoUIComponent<PoUIModelInput>
+    public class PoUITextBox : PoUIComponent<PoUIModelInput>
     {
-        public PoUIInput() : base()
+        public PoUITextBox() : base()
         {
 
         }

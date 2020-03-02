@@ -19,6 +19,9 @@ namespace ProjectOne
         OnMouseOut,
         OnMouseOver,
         OnMouseUp,
-        OnWheel
+        OnWheel,
+
+        //Form Events
+        OnBlur
     }
 }

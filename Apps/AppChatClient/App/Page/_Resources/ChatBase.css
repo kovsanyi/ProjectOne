@@ -1,0 +1,28 @@
+﻿.BubbleFriend {
+	background-color: #80d8ff;
+	width: 90%;
+	padding: 3px;
+	display: flex;
+}
+
+.BubbleMine {
+	display: flex;
+	background-color: #CFD8DC;
+	width: 90%;
+	padding: 3px;
+	float: right;
+}
+
+.BubbleMine:after {
+	content: '';
+	position: absolute;
+	right: 0;
+	top: 50%;
+	width: 0;
+	height: 0;
+	border: 31px solid transparent;
+	border-left-color: #CFD8DC;
+	border-right: 0;
+	margin-top: -31px;
+	margin-right: -31px;
+}

@@ -23,28 +23,35 @@ namespace ProjectOne
 
         protected virtual string CreateAttributes()
         {
-            var ret = "" +
-                CreateAttribute("accesskey", AccessKey) +
-                CreateAttribute("class", Class) +
-                CreateAttribute("dir", Direction) +
-                CreateAttribute("dropzone", DropZone) +
-                CreateAttribute("id", ID) +
-                CreateAttribute("lang", Lang) +
-                //CreateAttribute("style", Style) +
-                CreateAttribute("title", Title) +
-                (TabIndex > -1 ? CreateAttribute("tabindex", TabIndex.ToString()) : "") +
-                (ContentEditable ? CreateAttribute("contenteditable", "true") : "") +
-                (Draggable ? CreateAttribute("draggable", "true") : "") +
-                (Hidden ? "hidden" : "") +
-                (SpellCheck ? CreateAttribute("spellcheck", "true") : "") +
-                (Translate ? "" : CreateAttribute("translate", "no"));
+            var sb = new StringBuilder()
+                .Append(CreateAttribute("accesskey", AccessKey))
+                .Append(CreateAttribute("class", Class))
+                .Append(CreateAttribute("dir", Direction))
+                .Append(CreateAttribute("dropzone", DropZone))
+                .Append(CreateAttribute("id", ID))
+                .Append(CreateAttribute("lang", Lang))
+                //.Append(CreateAttribute("style", Style))
+                .Append(CreateAttribute("title", Title))
+                .Append(TabIndex > -1 ? CreateAttribute("tabindex", TabIndex.ToString()) : "")
+                .Append(ContentEditable ? CreateAttribute("contenteditable", "true") : "")
+                .Append(Draggable ? CreateAttribute("draggable", "true") : "")
+                .Append(CreateAttribute("hidden", Hidden, false))
+                .Append(SpellCheck ? CreateAttribute("spellcheck", "true") : "")
+                .Append(Translate ? string.Empty : CreateAttribute("translate", "no"));
+            var ret = sb.ToString().TrimStart();
             return ret;
         }
 
         protected string CreateAttribute(string attribute, string value)
         {
-            if (string.IsNullOrEmpty(value) || string.IsNullOrEmpty(value)) return "";
-            var ret = " " + attribute + "=\"" + value + "\"";
+            if (string.IsNullOrEmpty(attribute) || string.IsNullOrEmpty(value)) return string.Empty;
+            var ret = $" {attribute.ToLowerInvariant()}=\"{value}\"";
+            return ret;
+        }
+
+        protected string CreateAttribute(string attribute, bool value, bool defaultValue)
+        {
+            var ret = value == defaultValue ? string.Empty : attribute.ToLowerInvariant();
             return ret;
         }
     }

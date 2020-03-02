@@ -34,7 +34,8 @@ namespace ProjectOne
                 }
                 catch (Exception e)
                 {
-                    PoLogger.Log(PoLogSource.Default, PoLogType.Error, $"Cannot deserialize item: {f}. Exception: {e.Message}");
+                    PoLogger.Log(PoLogSource.Default, PoLogType.Error,
+                        $"Cannot deserialize item: {f}. Exception: {e.Message}");
                 }
             }
             _deserialized = true;

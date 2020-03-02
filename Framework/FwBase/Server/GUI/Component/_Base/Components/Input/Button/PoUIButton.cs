@@ -4,13 +4,11 @@ using System.Text;
 
 namespace ProjectOne
 {
-    public class PoUIButton : PoUIComponent<PoUIModelConfigurable>
+    public class PoUIButton : PoUIComponent<PoUIModelButton>
     {
-        public PoUIButton()
+        public PoUIButton() : base()
         {
-            Model.Configure("button");
+            
         }
-
-        public virtual void CallOnClick() { }
     }
 }

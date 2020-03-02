@@ -20,7 +20,7 @@ namespace ProjectOne
             _sessionPages = new ConcurrentDictionary<string, ConcurrentDictionary<string, PoUIComponent>>();
         }
 
-        public void ProcessRequest(PoHttpContext context, string sessionId)
+        public void ProcessRequest(PoHttpContext context, string sessionId, PoHttpSession session)
         {
             //nagyon TODO!
             var rootUrl = GetRootUrl(context, sessionId);
@@ -37,26 +37,32 @@ namespace ProjectOne
                 var sessionPage = CreateSessionPage(context, sessionId, rootUrl);
                 sessionPage.Index(context.Request);
                 pagesByUrl = new ConcurrentDictionary<string, PoUIComponent>();
-                //pagesByUrl.TryAdd(rootUrl, sessionPage);
-                pagesByUrl.TryAdd(context.Request.Url.AbsoluteUri.ToLowerInvariant(), sessionPage);
+                pagesByUrl.TryAdd(PageKey(context.Request), sessionPage);
                 _sessionPages.TryAdd(sessionId, pagesByUrl);
                 context.Response.WriteStringToOutput(sessionPage.ToHtml());
                 context.Response.SendSuccess();
                 return;
             }
             // If the page is not created, create one
-            if (!pagesByUrl.TryGetValue(context.Request.Url.AbsoluteUri.ToLowerInvariant(), out var page))
+            if (!pagesByUrl.TryGetValue(PageKey(context.Request), out var page))
             {
                 page = CreateSessionPage(context, sessionId, rootUrl);
                 page.Index(context.Request);
-                //_sessionPages[sessionId].TryAdd(rootUrl, page);
-                _sessionPages[sessionId].TryAdd(context.Request.Url.AbsoluteUri.ToLowerInvariant(), page);
+                _sessionPages[sessionId].TryAdd(PageKey(context.Request), page);
                 context.Response.WriteStringToOutput(page.ToHtml());
                 context.Response.SendSuccess();
                 return;
             }
             page.Index(context.Request);
-            context.Response.WriteStringToOutput(page.ToHtml());
+            if (context.Request.QueryString.ContainsKey("clientaction"))
+            {
+                var json = page.GetModificationsAsJson(session.LastVisited);
+                context.Response.WriteStringToOutput(json);
+            }
+            else
+            {
+                context.Response.WriteStringToOutput(page.ToHtml());
+            }
             context.Response.SendSuccess();
         }
 
@@ -68,6 +74,13 @@ namespace ProjectOne
             PoLogger.Log(PoLogSource.Default, PoLogType.Warn,
                 "Cannot determine page url: " + absolutePathLower + ". Session Id: " + sessionId);
             return string.Empty;
+        }
+
+        private string PageKey(PoHttpRequest request)
+        {
+            var abUri = request.Url.AbsolutePath;
+            if (!request.QueryString.TryGetValue("Name", out var name)) return abUri;
+            return abUri + name;
         }
     }
 }

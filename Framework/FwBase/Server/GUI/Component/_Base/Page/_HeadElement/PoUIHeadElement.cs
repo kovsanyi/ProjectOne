@@ -6,7 +6,7 @@ namespace ProjectOne
 {
     public abstract class PoUIHeadElement
     {
-        protected string Href;
+        protected readonly string Href;
         public PoUIHeadElement(string href)
         {
             Href = href;
@@ -15,6 +15,24 @@ namespace ProjectOne
         public virtual string ToHTML()
         {
             return string.Empty;
+        }
+
+        protected bool Equals(PoUIHeadElement other)
+        {
+            return Href == other.Href;
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (ReferenceEquals(null, obj)) return false;
+            if (ReferenceEquals(this, obj)) return true;
+            if (obj.GetType() != this.GetType()) return false;
+            return Equals((PoUIHeadElement)obj);
+        }
+
+        public override int GetHashCode()
+        {
+            return (Href != null ? Href.GetHashCode() : 0);
         }
     }
 }

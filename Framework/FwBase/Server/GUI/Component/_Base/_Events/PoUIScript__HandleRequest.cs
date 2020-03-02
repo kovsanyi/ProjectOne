@@ -44,6 +44,9 @@ namespace ProjectOne
                 case "onwheel":
                     CallOnWheel(request);
                     break;
+                case "onblur":
+                    CallOnBlur(request);
+                    break;
                 default:
                     PoLogger.Log(PoLogSource.Default, PoLogType.Warn, "Cannot detect event type: " + eventType);
                     break;

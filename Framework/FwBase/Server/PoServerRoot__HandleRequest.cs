@@ -10,7 +10,7 @@ namespace ProjectOne
         void handleRequest(object state)
         {
             var context = (HttpListenerContext)state;
-            PoLogger.Log(PoLogSource.Default, PoLogType.Info, $"HTTP request received from: {context.Request.RemoteEndPoint.ToString()}, URI: {context.Request.Url}");
+            //PoLogger.Log(PoLogSource.Default, PoLogType.Info, $"HTTP request received from: {context.Request.RemoteEndPoint.ToString()}, URI: {context.Request.Url}");
             //var data = new StreamReader(context.Request.InputStream, context.Request.ContentEncoding).ReadToEnd();
             //var dataCleaned = HttpUtility.UrlDecode(data);
             processRequest(context);

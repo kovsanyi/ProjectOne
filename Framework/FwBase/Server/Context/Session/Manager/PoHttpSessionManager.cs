@@ -14,7 +14,10 @@ namespace ProjectOne
         public void HandleRequest(PoHttpContext context)
         {
             var sessionId = FindOrCreateSession(context);
-            PoSessionContainer.Instance.ProcessRequest(context, sessionId);
+            var session = GetItems().FirstOrDefault(x => x.ID == sessionId);
+            PoSessionContainer.Instance.ProcessRequest(context, sessionId, session);
+
+            session?.VisitNow();
         }
 
         public string FindOrCreateSession(PoHttpContext context)
@@ -41,7 +44,7 @@ namespace ProjectOne
                 sessionCookie = CreateSessionCookie(context.Request);
                 return sessionCookie.Value;
             }
-            session.VisitNow();
+            //session.VisitNow();
             return session.ID;
         }
 

@@ -43,8 +43,4 @@
     <EmbeddedResource Include="Server\Resource\jQuery\jquery-3.4.1.min.js" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Server\GUI\Component\_Base\Components\Input\TextBox\" />
-  </ItemGroup>
-
 </Project>

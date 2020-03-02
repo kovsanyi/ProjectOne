@@ -6,70 +6,76 @@ namespace ProjectOne
 {
     partial class PoUIScript
     {
-        public event EventHandler OnKeyDown;
+        public event EventHandler<PoHttpRequest> OnKeyDown;
         private void CallOnKeyDown(PoHttpRequest request)
         {
-            OnKeyDown?.Invoke(null, EventArgs.Empty);
+            OnKeyDown?.Invoke(null, request);
         }
 
-        public event EventHandler OnKeyPress;
+        public event EventHandler<PoHttpRequest> OnKeyPress;
         private void CallOnKeyPress(PoHttpRequest request)
         {
-            OnKeyPress?.Invoke(null, EventArgs.Empty);
+            OnKeyPress?.Invoke(null, request);
         }
 
-        public event EventHandler OnKeyUp;
+        public event EventHandler<PoHttpRequest> OnKeyUp;
         private void CallOnKeyUp(PoHttpRequest request)
         {
-            OnKeyUp?.Invoke(null, EventArgs.Empty);
+            OnKeyUp?.Invoke(null, request);
         }
 
-        public event EventHandler OnClick;
+        public event EventHandler<PoHttpRequest> OnClick;
         private void CallOnClick(PoHttpRequest request)
         {
-            OnClick?.Invoke(null, EventArgs.Empty);
+            OnClick?.Invoke(null, request);
         }
 
-        public event EventHandler OnDbClick;
+        public event EventHandler<PoHttpRequest> OnDbClick;
         private void CallOnDbClick(PoHttpRequest request)
         {
-            OnDbClick?.Invoke(null, EventArgs.Empty);
+            OnDbClick?.Invoke(null, request);
         }
 
-        public event EventHandler OnMouseDown;
+        public event EventHandler<PoHttpRequest> OnMouseDown;
         private void CallOnMouseDown(PoHttpRequest request)
         {
-            OnMouseDown?.Invoke(null, EventArgs.Empty);
+            OnMouseDown?.Invoke(null, request);
         }
 
-        public event EventHandler OnMouseMove;
+        public event EventHandler<PoHttpRequest> OnMouseMove;
         private void CallOnMouseMove(PoHttpRequest request)
         {
-            OnMouseMove?.Invoke(null, EventArgs.Empty);
+            OnMouseMove?.Invoke(null, request);
         }
 
-        public event EventHandler OnMouseOut;
+        public event EventHandler<PoHttpRequest> OnMouseOut;
         private void CallOnMouseOut(PoHttpRequest request)
         {
-            OnMouseOut?.Invoke(null, EventArgs.Empty);
+            OnMouseOut?.Invoke(null, request);
         }
 
-        public event EventHandler OnMouseOver;
+        public event EventHandler<PoHttpRequest> OnMouseOver;
         private void CallOnMouseOver(PoHttpRequest request)
         {
-            OnMouseOver?.Invoke(null, EventArgs.Empty);
+            OnMouseOver?.Invoke(null, request);
         }
 
-        public event EventHandler OnMouseUp;
+        public event EventHandler<PoHttpRequest> OnMouseUp;
         private void CallOnMouseUp(PoHttpRequest request)
         {
-            OnMouseUp?.Invoke(null, EventArgs.Empty);
+            OnMouseUp?.Invoke(null, request);
         }
 
-        public event EventHandler OnWheel;
+        public event EventHandler<PoHttpRequest> OnWheel;
         private void CallOnWheel(PoHttpRequest request)
         {
-            OnWheel?.Invoke(null, EventArgs.Empty);
+            OnWheel?.Invoke(null, request);
+        }
+
+        public event EventHandler<PoHttpRequest> OnBlur;
+        private void CallOnBlur(PoHttpRequest request)
+        {
+            OnBlur?.Invoke(null, request);
         }
     }
 }
