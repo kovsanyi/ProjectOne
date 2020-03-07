@@ -6,22 +6,10 @@ namespace ProjectOne
 {
     partial class PoUIWindow
     {
-        PoUIComponent createHeader(string titleVal)
+        private void CreateHeader(string titleVal, string iconSrc)
         {
-            var minimize = new PoUIHyperlink();
-            //minimize.AddClass("window-form-button");
-            minimize.AddClass("w3-button");
-            minimize.Value = "_";
-            minimize.Model.Href = "/Desktop";
-            minimize.Script.InitScript(PoUIEventType.OnClick);
-            minimize.Script.OnClick += ScriptOnClickMinimize;
-
-            var close = new PoUIHyperlink();
-            //close.AddClass("window-form-button");
-            close.AddClass("w3-button");
-            close.Value = "x";
-            close.Script.InitScript(PoUIEventType.OnClick);
-            close.Script.OnClick += ScriptOnClickClose;
+            var minimize = CreateMinimizeBtn();
+            var close = CreateCloseBtn();
 
             var title = new PoUIHyperlink();
             title.Value = titleVal;
@@ -32,10 +20,10 @@ namespace ProjectOne
             btnContainer.Add(close);
 
             PoUIImage icon = null;
-            if (Icon != null)
+            if (iconSrc != null)
             {
                 icon = new PoUIImage();
-                icon.Model.Source = "/resource/" + Icon;
+                icon.Model.Source = "/resource/" + iconSrc;
                 icon.Model.Width = "25px";
                 icon.Style.SetStyle("margin", "8px");
             }
@@ -53,7 +41,30 @@ namespace ProjectOne
             header.Add(titleContainer);
             header.Add(btnContainer);
 
-            return header;
+            Add(header);
+        }
+
+        private PoUIComponent CreateMinimizeBtn()
+        {
+            var minimize = new PoUIHyperlink();
+            //minimize.AddClass("window-form-button");
+            minimize.AddClass("w3-button");
+            minimize.Value = "_";
+            minimize.Model.Href = "/Desktop";
+            minimize.Script.InitScript(PoUIEventType.OnClick);
+            minimize.Script.OnClick += ScriptOnClickMinimize;
+            return minimize;
+        }
+
+        private PoUIComponent CreateCloseBtn()
+        {
+            var close = new PoUIHyperlink();
+            //close.AddClass("window-form-button");
+            close.AddClass("w3-button");
+            close.Value = "x";
+            close.Script.InitScript(PoUIEventType.OnClick);
+            close.Script.OnClick += ScriptOnClickClose;
+            return close;
         }
 
         private void ScriptOnClickMinimize(object sender, PoHttpRequest e)

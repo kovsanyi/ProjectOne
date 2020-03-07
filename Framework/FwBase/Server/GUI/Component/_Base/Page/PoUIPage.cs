@@ -29,7 +29,7 @@ namespace ProjectOne
         {
             var headElements = new List<PoUIHeadElement>();
             headElements.AddRange(_body?.HeadElements());
-            headElements.Add(new PoUIHeadElementCSS("/resource/Desktop.css"));
+            headElements.Add(new PoUIHeadElementCSS("/resource/PoMaster.css"));
             headElements.Add(new PoUIHeadElementCSS("https://www.w3schools.com/w3css/4/w3.css"));
             return headElements;
         }

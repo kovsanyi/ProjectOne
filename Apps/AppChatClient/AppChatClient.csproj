@@ -6,7 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="App\Page\_Resources\ChatBase.css" />
+    <None Remove="App\Page\_Resources\PoChatClient.css" />
     <None Remove="Resource\Icon\circle_green.svg" />
     <None Remove="Resource\Icon\circle_red.svg" />
     <None Remove="Resource\Icon\love.svg" />
@@ -14,7 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Include="App\Page\_Resources\ChatBase.css" />
+    <EmbeddedResource Include="App\Page\_Resources\PoChatClient.css" />
     <EmbeddedResource Include="Resource\Icon\circle_green.svg" />
     <EmbeddedResource Include="Resource\Icon\love.svg" />
     <EmbeddedResource Include="Resource\Icon\people.svg" />

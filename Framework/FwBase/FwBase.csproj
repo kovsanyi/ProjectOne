@@ -14,8 +14,12 @@
     <None Remove="Common\Resource\Icon\DesktopIcon_NotFound.svg" />
     <None Remove="Common\Resource\Icon\home.svg" />
     <None Remove="Common\Resource\Icon\settings.svg" />
+    <None Remove="Server\GUI\Component\Desktop\CSS\PoDesktop.css" />
+    <None Remove="Server\GUI\Component\Desktop\CSS\PoLayout.css" />
+    <None Remove="Server\GUI\Component\Desktop\CSS\PoMaster.css" />
+    <None Remove="Server\GUI\Component\Desktop\CSS\PoTaskbar.css" />
+    <None Remove="Server\GUI\Component\Desktop\CSS\PoWindow.css" />
     <None Remove="Server\GUI\Component\_Base\_Events\JS\Main.js" />
-    <None Remove="Server\GUI\Component\Desktop\CSS\Desktop.css" />
     <None Remove="Server\GUI\Component\Taskbar\Resource\rocket.svg" />
     <None Remove="Server\GUI\Component\Taskbar\Resource\rocket_hover.svg" />
     <None Remove="Server\Resource\Bootstrap\bootstrap.css" />
@@ -33,8 +37,12 @@
     <EmbeddedResource Include="Common\Resource\Icon\Desktop\Desktop_NotFound.svg" />
     <EmbeddedResource Include="Common\Resource\Icon\App\home.svg" />
     <EmbeddedResource Include="Common\Resource\Icon\App\settings.svg" />
+    <EmbeddedResource Include="Server\GUI\Component\Desktop\CSS\PoLayout.css" />
+    <EmbeddedResource Include="Server\GUI\Component\Desktop\CSS\PoMaster.css" />
+    <EmbeddedResource Include="Server\GUI\Component\Desktop\CSS\PoTaskbar.css" />
+    <EmbeddedResource Include="Server\GUI\Component\Desktop\CSS\PoWindow.css" />
     <EmbeddedResource Include="Server\GUI\Component\_Base\_Events\JS\Main.js" />
-    <EmbeddedResource Include="Server\GUI\Component\Desktop\CSS\Desktop.css" />
+    <EmbeddedResource Include="Server\GUI\Component\Desktop\CSS\PoDesktop.css" />
     <EmbeddedResource Include="Server\GUI\Component\Taskbar\Resource\rocket.svg" />
     <EmbeddedResource Include="Server\GUI\Component\Taskbar\Resource\rocket_hover.svg" />
     <EmbeddedResource Include="Server\Resource\Bootstrap\bootstrap.css" />

@@ -9,40 +9,49 @@ namespace ProjectOne
 {
     partial class PoChatClient
     {
-        public void Connect(IPAddress ipAddr, int port)
+        private bool _connected;
+        private PoConnectedClient _server;
+        private Thread _serverThread;
+
+
+        public void Connect()
         {
-            if (_connected) //TODO
+            if (_connected || _server != null && _serverThread.IsAlive)
             {
-                _server.Client.Close();
+                PoLogger.Log(_logSource, PoLogType.Warn, $"Client already connected to {_ipAddress.MapToIPv4().ToString()}:{_port}");
                 return;
             }
 
-            if (_server != null && _serverThread.IsAlive) return;
-            _serverThread = new Thread(() => Connection(ipAddr, port));
+            //TODO validation
+            _serverThread = new Thread(PerformConnection);
             _serverThread.IsBackground = true;
             _serverThread.Start();
+            _connected = true;
         }
 
-        private void Connection(IPAddress ipAddr, int port)
+        public void Disconnect()
+        {
+            if (!_connected)
+            {
+                PoLogger.Log(_logSource, PoLogType.Warn, "Client already disconnected.");
+                return;
+            }
+            _server.Client.Close();
+            _connected = false;
+            PoLogger.Log(_logSource, PoLogType.Info, $"Server {_server.ToString()} connection closed.");
+        }
+
+        private void PerformConnection()
         {
             try
             {
-                _server = new PoConnectedClient();
-                _server.Client = new TcpClient();
-                _server.Client.Connect(ipAddr, port);
-                _server.Stream = _server.Client.GetStream();
+                var client = new TcpClient();
+                client.Connect(_ipAddress, _port);
+                _server = new PoConnectedClient(0, client);
                 _server.Handle = new EventWaitHandle(false, EventResetMode.AutoReset);
-                if (_server.Stream.CanRead && _server.Stream.CanWrite)
-                {
-                    try
-                    {
-                        _server.Stream.BeginRead(_server.Buffer, 0, _server.Buffer.Length, Read, null);
-                        _server.Handle.WaitOne();
-                    }
-                    catch (Exception e) { }
-                }
+                Read();
             }
-            catch (Exception e) { }
+            catch (Exception e) { PoLogger.LogException(_logSource, e); }
         }
     }
 }

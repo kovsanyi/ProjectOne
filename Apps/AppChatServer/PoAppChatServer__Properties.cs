@@ -6,14 +6,14 @@ namespace ProjectOne
 {
     partial class PoAppChatServer
     {
-        public string Name { get { return "Chat Server"; } }
+        public string Name => "Chat Server";
 
-        public string Description { get { return string.Empty; } }
+        public string Description => string.Empty;
 
-        public string Icon { get { return PoIcon_ChatServer.DektopIcon; } }
+        public string Icon => PoIcon_ChatServer.DesktopIcon;
 
-        public string AppPrefix { get { return "ChatServer"; } }
+        public string AppPrefix => "ChatServer";
 
-        public string ToolTipMessage { get { return "Provides real time communication between users."; } }
+        public string ToolTipMessage => "Provides real time communication between users.";
     }
 }

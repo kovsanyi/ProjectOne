@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Text;
@@ -8,34 +9,38 @@ namespace ProjectOne
 {
     public partial class PoBackgroundJob
     {
-        static readonly object _backgroundJobSync = new object();
-        static Dictionary<string, Task> _backgroundJobs;
+        private static readonly object Sync = new object();
+        private static readonly Dictionary<string, Task> BackgroundJobs;
 
         static PoBackgroundJob()
         {
-            _backgroundJobs = new Dictionary<string, Task>();
+            BackgroundJobs = new Dictionary<string, Task>();
         }
 
-        public static string Enqueue(Expression<Action> methodCall)
+        public static string Enqueue(Expression<Action> methodCall, string name = null)
         {
-            var jobId = PoCommonStrings.GenerateRandomStr();
-            var t = new Task(methodCall.Compile());
-            t.ContinueWith(CallOnTaskCompleted);
-            _backgroundJobs.Add(jobId, t);
-            t.Start();
-            PoLogger.Log(PoLogSource.Default, PoLogType.Info, $"Background job started: {jobId}");
-            return jobId;
+            lock (Sync)
+            {
+                var randStr = PoCommonStrings.GenerateRandomStr();
+                var jobId = string.IsNullOrWhiteSpace(name) ? randStr : $"{name}_{randStr}";
+                var t = new Task(methodCall.Compile());
+                t.ContinueWith(CallOnTaskCompleted);
+                BackgroundJobs.TryAdd(jobId, t);
+                t.Start();
+                PoLogger.Log(PoLogSource.Default, PoLogType.Info, $"Background job started: {jobId}");
+                return jobId;
+            }
         }
 
         static void CallOnTaskCompleted(Task task)
         {
-            lock (_backgroundJobSync)
+            lock (Sync)
             {
-                foreach (var bj in _backgroundJobs)
+                foreach (var bj in BackgroundJobs)
                 {
                     if (bj.Value != task) continue;
                     PoLogger.Log(PoLogSource.Default, PoLogType.Info, $"Background job completed: {bj.Key}");
-                    _backgroundJobs.Remove(bj.Key);
+                    BackgroundJobs.Remove(bj.Key);
                     break;
                 }
             }

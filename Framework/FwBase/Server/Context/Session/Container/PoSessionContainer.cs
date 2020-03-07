@@ -20,67 +20,71 @@ namespace ProjectOne
             _sessionPages = new ConcurrentDictionary<string, ConcurrentDictionary<string, PoUIComponent>>();
         }
 
-        public void ProcessRequest(PoHttpContext context, string sessionId, PoHttpSession session)
+        public void ProcessRequest(PoHttpContext context, PoHttpSession session)
         {
-            //nagyon TODO!
-            var rootUrl = GetRootUrl(context, sessionId);
-            // Invalid url, redirect to desktop
-            if (string.IsNullOrEmpty(rootUrl))
-            {
-                context.Response.Redirect(RootUrlDesktop);
-                context.Response.SendRedirect();
-                return;
-            }
-            // If there is no active session, create one
-            if (!_sessionPages.TryGetValue(sessionId, out var pagesByUrl))
-            {
-                var sessionPage = CreateSessionPage(context, sessionId, rootUrl);
-                sessionPage.Index(context.Request);
-                pagesByUrl = new ConcurrentDictionary<string, PoUIComponent>();
-                pagesByUrl.TryAdd(PageKey(context.Request), sessionPage);
-                _sessionPages.TryAdd(sessionId, pagesByUrl);
-                context.Response.WriteStringToOutput(sessionPage.ToHtml());
-                context.Response.SendSuccess();
-                return;
-            }
-            // If the page is not created, create one
-            if (!pagesByUrl.TryGetValue(PageKey(context.Request), out var page))
-            {
-                page = CreateSessionPage(context, sessionId, rootUrl);
-                page.Index(context.Request);
-                _sessionPages[sessionId].TryAdd(PageKey(context.Request), page);
-                context.Response.WriteStringToOutput(page.ToHtml());
-                context.Response.SendSuccess();
-                return;
-            }
+            var pageKey = CreatePageKey(context.Request);
+            if (RedirectToDesktop_IfInvalidPath(context, pageKey)) return;
+            if (CreateSession_IfNotExists(context, session.ID, pageKey)) return;
+            if (CreatePageInSession_IfPageNotExists(context, session.ID, pageKey)) return;
+            ResponseRequest(context, session, pageKey);
+        }
+
+        private void ResponseRequest(PoHttpContext context, PoHttpSession session, string pageKey)
+        {
+            if (!_sessionPages.TryGetValue(session.ID, out var pagesByUrl)) return;
+            if (!pagesByUrl.TryGetValue(CreatePageKey(context.Request), out var page)) return;
             page.Index(context.Request);
             if (context.Request.QueryString.ContainsKey("clientaction"))
             {
                 var json = page.GetModificationsAsJson(session.LastVisited);
                 context.Response.WriteStringToOutput(json);
+                context.Response.SendSuccess();
+                return;
             }
-            else
-            {
-                context.Response.WriteStringToOutput(page.ToHtml());
-            }
+            context.Response.WriteStringToOutput(page.ToHtml());
             context.Response.SendSuccess();
         }
 
-        private string GetRootUrl(PoHttpContext context, string sessionId)
+        private bool CreatePageInSession_IfPageNotExists(PoHttpContext context, string sessionId, string pageKey)
         {
-            var absolutePathLower = context.Request.Url.AbsolutePath.ToLowerInvariant();
-            if (absolutePathLower.StartsWith("/Desktop".ToLowerInvariant())) return "/desktop";
-            if (absolutePathLower.StartsWith("/App".ToLowerInvariant())) return "/app";
-            PoLogger.Log(PoLogSource.Default, PoLogType.Warn,
-                "Cannot determine page url: " + absolutePathLower + ". Session Id: " + sessionId);
-            return string.Empty;
+            if (!_sessionPages.TryGetValue(sessionId, out var pagesByUrl)) return false;
+            if (pagesByUrl.TryGetValue(CreatePageKey(context.Request), out var page)) return false;
+            page = CreateSessionPage(context, sessionId, pageKey);
+            page.Index(context.Request);
+            _sessionPages[sessionId].TryAdd(CreatePageKey(context.Request), page);
+            context.Response.WriteStringToOutput(page.ToHtml());
+            context.Response.SendSuccess();
+            return true;
         }
 
-        private string PageKey(PoHttpRequest request)
+        private bool CreateSession_IfNotExists(PoHttpContext context, string sessionId, string pageKey)
         {
-            var abUri = request.Url.AbsolutePath;
-            if (!request.QueryString.TryGetValue("Name", out var name)) return abUri;
-            return abUri + name;
+            if (_sessionPages.TryGetValue(sessionId, out var pagesByUrl)) return false;
+            var sessionPage = CreateSessionPage(context, sessionId, pageKey);
+            sessionPage.Index(context.Request);
+            pagesByUrl = new ConcurrentDictionary<string, PoUIComponent>();
+            pagesByUrl.TryAdd(CreatePageKey(context.Request), sessionPage);
+            _sessionPages.TryAdd(sessionId, pagesByUrl);
+            context.Response.WriteStringToOutput(sessionPage.ToHtml());
+            context.Response.SendSuccess();
+            return true;
+        }
+
+        private bool RedirectToDesktop_IfInvalidPath(PoHttpContext context, string pageKey)
+        {
+            if (!string.IsNullOrEmpty(pageKey)) return false;
+            context.Response.Redirect(RootUrlDesktop);
+            context.Response.SendRedirect();
+            return true;
+        }
+
+        private string CreatePageKey(PoHttpRequest request)
+        {
+            var abPath = request.Url.AbsolutePath;
+            if (abPath.StartsWith("/Desktop", StringComparison.InvariantCultureIgnoreCase)) return RootUrlDesktop;
+            if (!request.QueryString.TryGetValue("Name", out var name)) return string.Empty;
+            if (!request.QueryString.TryGetValue("Page", out var page)) return string.Empty;
+            return $"{RootUrlApp}_{name}_{page}";
         }
     }
 }

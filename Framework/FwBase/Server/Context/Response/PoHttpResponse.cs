@@ -62,7 +62,7 @@ namespace ProjectOne
 
         public void SendUnauthorized()
         {
-            CloseRequest(HttpStatusCode.NotFound);
+            CloseRequest(HttpStatusCode.Unauthorized);
         }
 
         private void CloseRequest(HttpStatusCode statusCode)

@@ -35,7 +35,7 @@ namespace ProjectOne
             if (!request.QueryString.TryGetValue("ClientAction", out var clientAction)) return;
             if (!request.QueryString.TryGetValue("SenderId", out var senderId)) return;
             if (!ID.Equals(senderId, StringComparison.InvariantCultureIgnoreCase)) return;
-            if (string.Equals(clientAction, "invokeEvent", StringComparison.InvariantCultureIgnoreCase))
+            if (string.Equals(clientAction, "InvokeEvent", StringComparison.InvariantCultureIgnoreCase))
             {
                 Script.HandleRequest(request);
                 return;

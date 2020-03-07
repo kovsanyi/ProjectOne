@@ -4,7 +4,7 @@ using System.Text;
 
 namespace ProjectOne
 {
-    public class PoChatMessage : PoManagedItem
+    public class PoChatClientMessage : PoManagedItem
     {
         public readonly string From;
         public readonly string To;
@@ -14,7 +14,7 @@ namespace ProjectOne
         private DateTime _received;
         public DateTime Received => _received;
 
-        public PoChatMessage(string from, string to, string message)
+        public PoChatClientMessage(string from, string to, string message)
         {
             From = from;
             To = to;

@@ -6,8 +6,6 @@ namespace ProjectOne
 {
     public partial class PoUIWindow : PoUILayout
     {
-        public string Icon;
-
         private PoUIComponent _content;
         protected virtual PoUIComponent Content
         {
@@ -16,6 +14,8 @@ namespace ProjectOne
             {
                 Remove(_content);
                 _content = value;
+                if (_content is PoUIComponent<PoUIModel> c)
+                    c.AddClass("window-content");
                 Add(_content);
                 Refresh();
             }
@@ -23,16 +23,8 @@ namespace ProjectOne
 
         public PoUIWindow(string title = null, string icon = null)
         {
-            Icon = icon;
-            AddClass("window");
-            var header = createHeader(title);
-            Add(header);
-        }
-
-        public override string ToHtml()
-        {
-
-            return base.ToHtml();
+            AddClass("window-form");
+            CreateHeader(title, icon);
         }
     }
 }

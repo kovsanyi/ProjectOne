@@ -1,0 +1,14 @@
+﻿.window-form {
+	height: calc(100% - 43px);
+}
+
+.window-header{
+	color: white;
+	height: 40px;
+	background-color: #19659e;
+	padding: 5px;
+}
+
+.window-content {
+	height: calc(100% - 43px);
+}

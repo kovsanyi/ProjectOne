@@ -1,0 +1,23 @@
+﻿.desktop {
+	display: grid;
+	grid-auto-flow: row;
+	grid-gap: 10px;
+	padding: 10px;
+}
+
+.desktop-item {
+	width: 50px;
+	padding: 5px;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: 50px 50px;
+	font-weight: bold;
+	font-size: 12px;
+	text-decoration: none;
+	text-align: center;
+	color: black;
+}
+
+.desktop-item:hover {
+	background-color: #c0c0c0;
+}

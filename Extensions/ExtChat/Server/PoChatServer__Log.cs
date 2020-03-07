@@ -4,8 +4,8 @@ using System.Text;
 
 namespace ProjectOne
 {
-    public partial class PoChatMessageManager : PoItemManager<PoChatMessage>
+    partial class PoChatServer
     {
-        
+        private IPoLogSource _logSource = PoLogSource.Default;
     }
 }

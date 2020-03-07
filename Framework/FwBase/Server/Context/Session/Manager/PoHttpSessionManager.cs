@@ -15,8 +15,7 @@ namespace ProjectOne
         {
             var sessionId = FindOrCreateSession(context);
             var session = GetItems().FirstOrDefault(x => x.ID == sessionId);
-            PoSessionContainer.Instance.ProcessRequest(context, sessionId, session);
-
+            PoSessionContainer.Instance.ProcessRequest(context, session);
             session?.VisitNow();
         }
 

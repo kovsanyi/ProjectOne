@@ -12,10 +12,10 @@ namespace ProjectOne
         {
             AddMessageBubbleContainer();
             AddMessageInput();
-            PoChatMessageManager.Instance.OnItemAdded += OnMessageArrived;
+            PoChatClientMessageManager.Instance.OnItemAdded += OnMessageArrived;
         }
 
-        private void OnMessageArrived(object sender, PoChatMessage e)
+        private void OnMessageArrived(object sender, PoChatClientMessage e)
         {
             var msg = new PoUIConversationBubble(e.Message, PoUIConversationBubbleType.Mine);
             _messageBubbleContainer.Add(msg);
@@ -24,7 +24,7 @@ namespace ProjectOne
         private void AddMessageInput()
         {
             var mi = new PoUIMessageInput();
-
+            mi.AddClass("message-input");
             Add(mi);
         }
 
@@ -38,12 +38,13 @@ namespace ProjectOne
             var msg6 = new PoUIConversationBubble(GetSample(), PoUIConversationBubbleType.Friend);
 
             _messageBubbleContainer = new PoUILayout();
+            _messageBubbleContainer.AddClass("message-container");
             _messageBubbleContainer.Add(msg1);
             _messageBubbleContainer.Add(msg2);
-            _messageBubbleContainer.Add(msg3);
-            _messageBubbleContainer.Add(msg4);
-            _messageBubbleContainer.Add(msg5);
-            _messageBubbleContainer.Add(msg6);
+            //_messageBubbleContainer.Add(msg3);
+            //_messageBubbleContainer.Add(msg4);
+            //_messageBubbleContainer.Add(msg5);
+            //_messageBubbleContainer.Add(msg6);
 
             Add(_messageBubbleContainer);
         }

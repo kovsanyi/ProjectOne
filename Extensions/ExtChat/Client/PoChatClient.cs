@@ -9,13 +9,13 @@ namespace ProjectOne
 {
     public partial class PoChatClient
     {
-        private Thread _serverThread;
-        private PoConnectedClient _server;
-        private bool _connected;
+        private readonly IPAddress _ipAddress;
+        private readonly int _port;
 
-        public PoChatClient()
+        public PoChatClient(IPAddress ipAddress, int port)
         {
-
+            _ipAddress = ipAddress;
+            _port = port;
         }
     }
 }

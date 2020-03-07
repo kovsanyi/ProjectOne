@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Net;
 
 namespace ProjectOne
 {
@@ -10,7 +11,10 @@ namespace ProjectOne
 
         public void CallOnStarted()
         {
-            //PoChatServer.Instance.Start();
+            IPAddress.TryParse("127.0.0.1", out var ipAddress);
+            var port = 2107;
+            var server = new PoChatServer(ipAddress, port);
+            server.Start();
         }
 
         public void CallOnStopped()

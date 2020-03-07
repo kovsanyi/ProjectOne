@@ -6,7 +6,7 @@ namespace ProjectOne
 {
     partial class PoUIAppForm
     {
-        PoUIComponent createPage(IPoApp app, string pageName)
+        private PoUIComponent CreatePage(IPoApp app, string pageName)
         {
             var map = new PoUIMapPage();
             app.CreatePages(map);
@@ -16,8 +16,10 @@ namespace ProjectOne
                 var page = (PoUIComponent)Activator.CreateInstance(pageType);
                 return page;
             }
-            catch (Exception)
+            catch (Exception e)
             {
+                PoLogger.LogException(PoLogSource.Default, e,
+                    $"Cannot create page content of app {app.GetType().Namespace}.");
                 return null;
             }
         }

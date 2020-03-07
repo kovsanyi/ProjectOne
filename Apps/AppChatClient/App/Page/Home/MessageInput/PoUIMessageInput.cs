@@ -36,8 +36,10 @@ namespace ProjectOne
 
         protected virtual void OnSendButtonClicked(object sender, PoHttpRequest req)
         {
-            var msg = new PoChatMessage("guest@localhost", "guest2@localhost", _messageInput.Value);
-            PoChatMessageManager.Instance.Add(msg);
+            if (PoAppChatClient.ChatClient == null) return;
+            PoAppChatClient.ChatClient.Send(_messageInput.Value);
+            var msg = new PoChatClientMessage("guest@localhost", "guest@localhost", _messageInput.Value);
+            PoChatClientMessageManager.Instance.Add(msg);
         }
     }
 }

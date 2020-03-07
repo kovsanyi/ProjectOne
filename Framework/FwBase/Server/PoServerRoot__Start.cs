@@ -17,9 +17,9 @@ namespace ProjectOne
             {
                 if (_listener == null) return;
                 if (_listener.IsListening) return;
-                PoLogger.Log(PoLogSource.Default, PoLogType.Info, $"Starting server: {_listener.Prefixes.FirstOrDefault()}");
+                PoLogger.Log(PoLogSource.Default, PoLogType.Info, $"Starting web server: {_listener.Prefixes.FirstOrDefault()}");
                 _listener.Start();
-                PoBackgroundJob.Enqueue(() => listenerThread());
+                PoBackgroundJob.Enqueue(() => listenerThread(), "PoServerRoot/Start");
             }
             catch (Exception e)
             {

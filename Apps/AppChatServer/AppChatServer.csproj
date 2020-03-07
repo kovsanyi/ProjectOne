@@ -7,10 +7,18 @@
 
   <ItemGroup>
     <None Remove="Resource\DesktopIcon_ChatServer.svg" />
+    <None Remove="Resource\Icon\ChatClient\circle_green.svg" />
+    <None Remove="Resource\Icon\ChatClient\circle_red.svg" />
+    <None Remove="Resource\Icon\ChatClient\love.svg" />
+    <None Remove="Resource\Icon\ChatClient\people.svg" />
     <None Remove="Resource\Icon\data-complexity.svg" />
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Include="Resource\Icon\ChatClient\circle_green.svg" />
+    <EmbeddedResource Include="Resource\Icon\ChatClient\circle_red.svg" />
+    <EmbeddedResource Include="Resource\Icon\ChatClient\love.svg" />
+    <EmbeddedResource Include="Resource\Icon\ChatClient\people.svg" />
     <EmbeddedResource Include="Resource\Icon\data-complexity.svg" />
   </ItemGroup>
 

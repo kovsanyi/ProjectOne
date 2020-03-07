@@ -8,33 +8,17 @@ using System.Threading.Tasks;
 
 namespace ProjectOne
 {
-    public partial class PoChatServer
+    public partial class PoChatServer : PoManagedItem
     {
-        private readonly ConcurrentDictionary<int, PoConnectedClient> _clientsConnected =
-            new ConcurrentDictionary<int, PoConnectedClient>();
-        private bool _active;
-        private Thread _listenerThread;
-        private IPAddress _serverAddr;
-        private int _serverPort;
-        private Task _send;
+        private readonly IPAddress _ipAddress;
+        private readonly int _port;
 
-        public void Start()
-        {
-            if (_active)
-            {
-                _active = false;
-            }
-            else
-            {
-                if (_listenerThread != null && _listenerThread.IsAlive) return;
-                if (_serverPort < 0 || _serverPort > 65535) return;
-                //TODO
-            }
-        }
+        public PoChatServer() : this(null, -1) { }
 
-        public void Stop()
+        public PoChatServer(IPAddress ipAddress, int port) : base()
         {
-            //TODO
+            _ipAddress = ipAddress;
+            _port = port;
         }
     }
 }

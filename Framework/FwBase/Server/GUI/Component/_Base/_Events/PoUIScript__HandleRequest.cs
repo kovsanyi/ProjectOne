@@ -8,7 +8,7 @@ namespace ProjectOne
     {
         public void HandleRequest(PoHttpRequest request)
         {
-            if (!request.QueryString.TryGetValue("eventType".ToLowerInvariant(), out var eventType)) return;
+            if (!request.QueryString.TryGetValue("EventType".ToLowerInvariant(), out var eventType)) return;
             switch (eventType.ToLowerInvariant())
             {
                 case "onkeydown":

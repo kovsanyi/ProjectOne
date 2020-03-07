@@ -6,21 +6,37 @@ namespace ProjectOne
 {
     partial class PoChatClient
     {
+        private void Read()
+        {
+            if (!_server.Stream.CanRead && !_server.Stream.CanWrite)
+            {
+                PoLogger.Log(_logSource, PoLogType.Warn, $"Cannot read server data {_server.ToString()}. Disconnect from server.");
+                Disconnect();
+                return;
+            }
+            try
+            {
+                _server.Stream.BeginRead(_server.Buffer, 0, _server.Buffer.Length, Read, null);
+                _server.Handle.WaitOne();
+            }
+            catch (Exception e) { PoLogger.LogException(_logSource, e); }
+        }
+
         private void Read(IAsyncResult ar)
         {
             int bytes = 0;
-            if (_server.Client.Connected)
+            if (_server.IsAlive())
             {
                 try
                 {
                     bytes = _server.Stream.EndRead(ar);
                 }
-                catch (Exception e) { }
+                catch (Exception e) { PoLogger.LogException(_logSource, e); }
             }
 
             if (bytes == 0)
             {
-                _server.Client.Close();
+                Disconnect();
                 _server.Handle.Set();
                 return;
             }
@@ -46,7 +62,7 @@ namespace ProjectOne
             {
                 _server.Stream.BeginRead(_server.Buffer, 0, _server.Buffer.Length, Read, null);
             }
-            catch (Exception e) { }
+            catch (Exception e) { PoLogger.LogException(_logSource, e); }
             finally
             {
                 _server.Handle.Set();
