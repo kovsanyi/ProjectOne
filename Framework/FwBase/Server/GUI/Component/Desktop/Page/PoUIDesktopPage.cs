@@ -13,10 +13,16 @@ namespace ProjectOne
             var desktop = new PoUIDesktop();
             desktop.LoadIcons(PoAppManager.AppsMapped.Values);
 
-            var content = new PoUILayout();
-            content.Add(desktop);
-            content.Add(taskbar);
-            Body = content;
+            var desktopContaier = new PoUILayout();
+            desktopContaier.AddClass("desktop-container");
+            desktopContaier.Add(desktop);
+
+            var wrapper = new PoUILayout();
+            wrapper.AddClass("wrapper");
+            wrapper.Model.ID = "PoWrapper";
+            wrapper.Add(desktopContaier);
+            wrapper.Add(taskbar);
+            Body = wrapper;
         }
     }
 }

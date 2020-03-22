@@ -9,4 +9,10 @@
     <ProjectReference Include="..\..\Framework\FwBase\FwBase.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Reference Include="Xamarin.Android.Support.Compat">
+      <HintPath>..\..\..\..\..\..\..\Microsoft\Xamarin\NuGet\xamarin.android.support.compat\28.0.0.3\lib\monoandroid90\Xamarin.Android.Support.Compat.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
 </Project>

@@ -4,7 +4,7 @@ using System.Text;
 
 namespace ProjectOne
 {
-    public abstract partial class PoUIComponent
+    public abstract partial class PoUIComponent : IDisposable
     {
         public PoUIScript Script;
         public PoUIStyle Style;
@@ -13,7 +13,7 @@ namespace ProjectOne
 
         protected PoUIComponent()
         {
-            Script = new PoUIScript();
+            Script = new PoUIScript(this);
             Style = new PoUIStyle();
         }
 
@@ -57,5 +57,9 @@ namespace ProjectOne
             var ret = $"/resource/{resource}";
             return ret;
         }
+
+        public virtual void AddClass(string className) { }
+
+        public virtual void RemoveClass(string className) { }
     }
 }

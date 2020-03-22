@@ -1,4 +1,10 @@
-﻿.taskbar .icons .icons-left .start-menu{
+﻿.taskbar{
+	height: var(--taskbar-height);
+	width: 100%;
+	background: #19659e;
+}
+
+.taskbar .icons .icons-left .start-menu{
 	display: inline-block;
 	height: 43px;
 	width: 48px;
@@ -23,14 +29,6 @@
 	width: 50px;
 	float: left;
 	height: 100%;
-}
-
-.taskbar{
-	position: fixed;
-	bottom: 0;
-	height: 43px;
-	width: 100%;
-	background: #19659e;
 }
 
 .taskbar .icons .icons-left .start-menu:hover{

@@ -6,79 +6,46 @@ namespace ProjectOne
 {
     partial class PoUIWindow
     {
-        private void CreateHeader(string titleVal, string iconSrc)
+        private void CreateHeader(string title, string iconScrName)
         {
-            var minimize = CreateMinimizeBtn();
-            var close = CreateCloseBtn();
+            InitMinimizeBtn();
+            InitCloseBtn();
 
-            var title = new PoUIHyperlink();
-            title.Value = titleVal;
+            var btnContainer = new PoUILayout(PoOrientationType.Horizontal);
+            btnContainer.AddClass("form-ctrl-btn-container");
+            btnContainer.Add(ButtonMinimize);
+            btnContainer.Add(ButtonClose);
 
-            var btnContainer = new PoUILayout();
-            btnContainer.AddClass("w3-display-topright");
-            btnContainer.Add(minimize);
-            btnContainer.Add(close);
-
-            PoUIImage icon = null;
-            if (iconSrc != null)
-            {
-                icon = new PoUIImage();
-                icon.Model.Source = "/resource/" + iconSrc;
-                icon.Model.Width = "25px";
-                icon.Style.SetStyle("margin", "8px");
-            }
-
-            var titleContainer = new PoUILayout();
-            titleContainer.Style.SetStyle("padding", "0");
-            titleContainer.AddClass("w3-container");
-            titleContainer.Add(icon);
-            titleContainer.Add(title);
-
-            var header = new PoUILayout();
+            var header = new PoUILayout(PoOrientationType.Horizontal);
             header.AddClass("window-header");
-            header.AddClass("w3-container");
             header.Style.SetStyle("padding", "0");
-            header.Add(titleContainer);
+            header.Add(CreateTitle(iconScrName, title));
             header.Add(btnContainer);
 
             Add(header);
         }
 
-        private PoUIComponent CreateMinimizeBtn()
+        private PoUIComponent CreateTitle(string iconScrName, string title)
         {
-            var minimize = new PoUIHyperlink();
-            //minimize.AddClass("window-form-button");
-            minimize.AddClass("w3-button");
-            minimize.Value = "_";
-            minimize.Model.Href = "/Desktop";
-            minimize.Script.InitScript(PoUIEventType.OnClick);
-            minimize.Script.OnClick += ScriptOnClickMinimize;
-            return minimize;
+            PoUIImage formIcon = null;
+            if (iconScrName != null)
+            {
+                formIcon = new PoUIImage();
+                formIcon.Model.Source = CreateResourceStr(iconScrName);
+                formIcon.Model.Width = "25px";
+                formIcon.Style.SetStyle("margin", "8px");
+            }
+
+            var formTitle = new PoUIHyperlink();
+            formTitle.Style.SetStyle("margin", "auto 0");
+            formTitle.Value = title;
+
+            var container = new PoUILayout(PoOrientationType.Horizontal);
+            container.AddClass("form-title");
+            container.Style.SetStyle("padding", "0");
+            if (formIcon != null) container.Add(formIcon);
+            container.Add(formTitle);
+            return container;
         }
-
-        private PoUIComponent CreateCloseBtn()
-        {
-            var close = new PoUIHyperlink();
-            //close.AddClass("window-form-button");
-            close.AddClass("w3-button");
-            close.Value = "x";
-            close.Script.InitScript(PoUIEventType.OnClick);
-            close.Script.OnClick += ScriptOnClickClose;
-            return close;
-        }
-
-        private void ScriptOnClickMinimize(object sender, PoHttpRequest e)
-        {
-            CallOnMinimize();
-        }
-
-        private void ScriptOnClickClose(object sender, PoHttpRequest e)
-        {
-            CallOnClosed();
-        }
-
-        protected virtual void CallOnMinimize() { }
-
-        protected virtual void CallOnClosed() { }
     }
 }

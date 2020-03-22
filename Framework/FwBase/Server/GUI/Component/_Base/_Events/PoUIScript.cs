@@ -7,10 +7,12 @@ namespace ProjectOne
     public partial class PoUIScript
     {
         protected readonly Dictionary<PoUIEventType, string> Scripts;
+        private PoUIComponent _component;
 
-        public PoUIScript()
+        public PoUIScript(PoUIComponent component)
         {
             Scripts = new Dictionary<PoUIEventType, string>();
+            _component = component;
         }
 
         public virtual string CreateScript()

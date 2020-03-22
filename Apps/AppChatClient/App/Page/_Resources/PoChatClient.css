@@ -1,26 +1,53 @@
-﻿.chat-client-home {
+﻿:root {
+	--message-input-height: 200px;
+}
+
+.chat-client-home {
 	height: 100%;
+	width: 100%;
+	overflow: auto;
 }
 
 .friend-list {
-	height: 100%;
+	margin: 5px;
+	margin-right: 0;
+	padding: 5px;
+	border: 1px solid gray;
+}
+
+.friend-list-item:hover{
+	cursor: pointer;
+	background-color: #d9d9d9;
 }
 
 .conversation-form {
 	height: 100%;
+	width: 100%;
 }
 
 .message-container {
-	height: 100%;
+	height: calc(100% - var(--message-input-height) - 5px - 10px);
+	/*width: 100%;*/
+	padding: 5px;
+	overflow: auto;
+	margin: 5px;
+	border: 1px solid gray;
+}
+
+.message-input {
+	height: var(--message-input-height);
+	/*width: 100%;*/
+	margin: 5px;
 }
 
 .conversation-bubble {
-
+	max-width: 90%;
+	margin: 5px 0;
+	padding: 3px;
 }
 
 .bubble-friend {
 	background-color: #80d8ff;
-	width: 90%;
 	padding: 3px;
 	display: flex;
 }
@@ -28,14 +55,11 @@
 .bubble-mine {
 	display: flex;
 	background-color: #CFD8DC;
-	width: 90%;
-	padding: 3px;
 	float: right;
 }
 
-.message-input {
-	width: 100%;
-	height: 250px;
+.chat-send-btn {
+	padding: 5px 22px;
 }
 
 /*

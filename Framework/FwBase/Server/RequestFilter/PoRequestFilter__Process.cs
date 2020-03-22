@@ -4,7 +4,7 @@ using System.Text;
 
 namespace ProjectOne
 {
-    partial class PoRequestFilter : IPoRequestFilter
+    partial class PoRequestFilter
     {
         public bool ProcessRequest(PoHttpContext context)
         {
@@ -12,7 +12,8 @@ namespace ProjectOne
             {
                 var isProcessed = filer.ProcessRequest(context);
                 if (!isProcessed) continue;
-                PoLogger.Log(PoLogSource.Default, PoLogType.Debug, "HTTP request processed by " + filer.GetType().Name);
+                PoLogger.Log(PoLogSource.Default, PoLogType.Debug,
+                    $"HTTP request processed by {filer.Name}. URL: {context.Request.RawUrl}");
                 return true;
             }
             context.Response.SendNotFound();

@@ -14,17 +14,16 @@ namespace ProjectOne
             {
                 Remove(_content);
                 _content = value;
-                if (_content is PoUIComponent<PoUIModel> c)
-                    c.AddClass("window-content");
+                _content.AddClass("window-content");
                 Add(_content);
                 Refresh();
             }
         }
 
-        public PoUIWindow(string title = null, string icon = null)
+        public PoUIWindow(string title = null, string iconSrcName = null)
         {
             AddClass("window-form");
-            CreateHeader(title, icon);
+            CreateHeader(title, iconSrcName);
         }
     }
 }

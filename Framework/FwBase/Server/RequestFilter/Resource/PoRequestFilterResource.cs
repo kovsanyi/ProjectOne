@@ -8,6 +8,8 @@ namespace ProjectOne
 {
     public class PoRequestFilterResource : IPoRequestFilter
     {
+        public string Name => "Resource";
+
         public bool ProcessRequest(PoHttpContext context)
         {
             var path = context.Request.Url.AbsolutePath.ToLowerInvariant();

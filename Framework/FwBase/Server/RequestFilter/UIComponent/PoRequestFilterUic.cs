@@ -8,10 +8,12 @@ namespace ProjectOne
 {
     public class PoRequestFilterUic : IPoRequestFilter
     {
+        public string Name => "UIC";
+
         public bool ProcessRequest(PoHttpContext context)
         {
             var url = context.Request.Url.AbsolutePath.ToLowerInvariant();
-            if (!url.StartsWith("/desktop") && !url.StartsWith("/app")) return false;
+            if (!url.StartsWith("/desktop") && !url.StartsWith("/app") && !url.StartsWith("/close")) return false;
             PoHttpSessionManager.Instance.HandleRequest(context);
             return true;
         }

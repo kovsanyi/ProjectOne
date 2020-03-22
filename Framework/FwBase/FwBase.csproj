@@ -19,6 +19,7 @@
     <None Remove="Server\GUI\Component\Desktop\CSS\PoMaster.css" />
     <None Remove="Server\GUI\Component\Desktop\CSS\PoTaskbar.css" />
     <None Remove="Server\GUI\Component\Desktop\CSS\PoWindow.css" />
+    <None Remove="Server\GUI\Component\_Base\Components\Input\Button\Style\PoButton.css" />
     <None Remove="Server\GUI\Component\_Base\_Events\JS\Main.js" />
     <None Remove="Server\GUI\Component\Taskbar\Resource\rocket.svg" />
     <None Remove="Server\GUI\Component\Taskbar\Resource\rocket_hover.svg" />
@@ -41,6 +42,7 @@
     <EmbeddedResource Include="Server\GUI\Component\Desktop\CSS\PoMaster.css" />
     <EmbeddedResource Include="Server\GUI\Component\Desktop\CSS\PoTaskbar.css" />
     <EmbeddedResource Include="Server\GUI\Component\Desktop\CSS\PoWindow.css" />
+    <EmbeddedResource Include="Server\GUI\Component\_Base\Components\Input\Button\Style\PoButton.css" />
     <EmbeddedResource Include="Server\GUI\Component\_Base\_Events\JS\Main.js" />
     <EmbeddedResource Include="Server\GUI\Component\Desktop\CSS\PoDesktop.css" />
     <EmbeddedResource Include="Server\GUI\Component\Taskbar\Resource\rocket.svg" />

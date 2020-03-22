@@ -7,14 +7,13 @@ namespace ProjectOne
 {
     partial class PoUIComponent<T>
     {
-        public PoUIComponent<T> AddClass(string className)
+        public override void AddClass(string className)
         {
-            if (HasClass(className)) return this;
+            if (HasClass(className)) return;
             Model.Class = string.Join(' ', Model.Class ?? string.Empty, className).Trim();
-            return this;
         }
 
-        public void RemoveClass(string className)
+        public override void RemoveClass(string className)
         {
             if (!HasClass(className)) return;
             var classes = Model.Class

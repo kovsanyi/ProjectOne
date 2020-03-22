@@ -8,6 +8,7 @@ namespace ProjectOne
 {
     public partial class PoUILayout : PoUIComponent<PoUIModelConfigurable>
     {
+        private readonly object _sync = new object();
         private readonly List<PoUIComponent> _items;
 
         public PoUILayout() : this(PoOrientationType.Vertical) { }
@@ -22,20 +23,25 @@ namespace ProjectOne
         public override List<PoUIHeadElement> HeadElements()
         {
             var headElements = base.HeadElements();
-            foreach (var item in _items)
-                headElements.AddRange(item.HeadElements());
+            lock (_sync)
+            {
+                foreach (var item in _items)
+                    headElements.AddRange(item.HeadElements());
+            }
             return headElements;
         }
 
         public override string ToHtml()
         {
             var sb = new StringBuilder();
-            foreach (var item in _items) //TODO coll modified ex
+            lock (_items)
             {
-                var html = item.ToHtml();
-                sb.Append(html);
+                foreach (var item in _items)
+                {
+                    var html = item.ToHtml();
+                    sb.Append(html);
+                }
             }
-
             Value = sb.ToString();
             return base.ToHtml();
         }

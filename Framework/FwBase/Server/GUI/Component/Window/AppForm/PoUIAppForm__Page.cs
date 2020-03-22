@@ -10,10 +10,12 @@ namespace ProjectOne
         {
             var map = new PoUIMapPage();
             app.CreatePages(map);
+
             if (!map.TryGetPageByName(pageName, out var title, out var pageType)) return null;
             try
             {
                 var page = (PoUIComponent)Activator.CreateInstance(pageType);
+                page.AddClass("app-form-content");
                 return page;
             }
             catch (Exception e)

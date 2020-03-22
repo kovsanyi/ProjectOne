@@ -9,19 +9,20 @@ namespace ProjectOne
         public readonly string FriendName;
         private PoUIImage _connectedState;
 
-        public PoUIFriendListItem(string friendName, PoConnectedState connectedState) : base(PoOrientationType.Horizontal)
+        public PoUIFriendListItem(string friendName, PoConnectedStatus connectedState) : base(PoOrientationType.Horizontal)
         {
+            AddClass("friend-list-item");
             FriendName = friendName;
             InitComponents();
             SetStateIndicator(connectedState);
         }
 
-        public void SetStateIndicator(PoConnectedState connectedState)
+        public void SetStateIndicator(PoConnectedStatus connectedState)
         {
             if (_connectedState == null || _connectedState.IsDisposed) return;
             switch (connectedState)
             {
-                case PoConnectedState.Online:
+                case PoConnectedStatus.Online:
                     _connectedState.Model.Source = CreateResourceStr(PoIcon_ChatClient.ConnectedStateOnline);
                     break;
                 default:

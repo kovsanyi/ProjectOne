@@ -1,3 +1,4 @@
 ﻿.div-horizontal {
-	display: inline-flex;
+	display: flex;
+	display: -webkit-flex;
 }

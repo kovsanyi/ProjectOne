@@ -18,8 +18,8 @@ namespace ProjectOne
         private void AddTextArea()
         {
             _messageInput = new PoUITextArea();
-            _messageInput.Model.Rows = 10;
             _messageInput.Style.SetStyle("width", "100%");
+            _messageInput.Style.SetStyle("none", "resize");
 
             Add(_messageInput);
         }

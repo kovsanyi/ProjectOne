@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net;
 using System.Text;
 
@@ -7,65 +8,74 @@ namespace ProjectOne
 {
     public class PoUIFriendList : PoUILayout
     {
+        private bool _initialized;
+
+        public event EventHandler<string> OnFriendSelected;
+
         public PoUIFriendList() : base()
         {
-            Style.SetStyle("padding", "10px");
+            AddClass("friend-list");
             InitComponents();
         }
 
-        private void InitComponents()
+        private void InitComponents() { }
+
+        public override void Index2(PoHttpRequest request)
         {
-            var usr1 = new PoUIFriendListItem("PO User Lucy", PoConnectedState.Online);
-            var usr2 = new PoUIFriendListItem("PO User Emily", PoConnectedState.Online);
-            var usr3 = new PoUIFriendListItem("PO User Jack", PoConnectedState.Offline);
-            Add(usr1);
-            Add(usr2);
-            Add(usr3);
-            Add(CreateServerAddrInput());
+            if (_initialized) return;
+            _initialized = true;
+            PoAppChatClient.InitChatClientIfNotInitialized(request.User.Username, request.User.Domain, request.User.Password);
+            PoChatConversationManager.Instance.Start();
+            PoAppChatClient.ChatClient.OnUserConnected += ChatClient_OnUserConnected;
+            PoAppChatClient.ChatClient.OnUserDisconnected += ChatClient_OnUserDisconnected;
+            InitFriendList(PoAppChatClient.ChatClient.ConnectedUsers.ToDictionary(x => x.Key, x => x.Value));
+            PoAppChatClient.ChatClient.SendLoginRequest(request.User.Username, request.User.Password);
         }
 
-        private PoUITextBox _inputServerAddress;
-        private PoUIButton _btnConnect;
-        private PoUIComponent CreateServerAddrInput()
+        private void InitFriendList(Dictionary<string, PoConnectedStatus> usersByStatus)
         {
-            _inputServerAddress = new PoUITextBox();
-            _inputServerAddress.Model.Value = "127.0.0.1:2107";
-
-            _btnConnect = new PoUIButton();
-            _btnConnect.Value = "Connect";
-            _btnConnect.Script.InitScript(PoUIEventType.OnClick);
-            _btnConnect.Script.OnClick += Script_OnClick;
-
-            var layout = new PoUILayout(PoOrientationType.Horizontal);
-            layout.Add(_inputServerAddress);
-            layout.Add(_btnConnect);
-            return layout;
-        }
-
-        private void Script_OnClick(object sender, PoHttpRequest e)
-        {
-            if (_inputServerAddress == null || _inputServerAddress.IsDisposed) return;
-            if (PoAppChatClient.ChatClient != null)
+            foreach (var userByStatus in usersByStatus)
             {
-                PoAppChatClient.ChatClient.Disconnect();
-                PoAppChatClient.ChatClient = null;
-                _btnConnect.Value = "Connect";
-                _btnConnect.Refresh();
+                AddFriendListItem(userByStatus.Key, userByStatus.Value);
+            }
+        }
+
+        private void ChatClient_OnUserConnected(string username, string domain)
+        {
+            foreach (var item in this)
+            {
+                if (!(item is PoUIFriendListItem friendListItem)) continue;
+                if (friendListItem.FriendName != username) continue;
+                friendListItem.SetStateIndicator(PoConnectedStatus.Online);
                 return;
             }
-            PoAppChatClient.ChatClient = new PoChatClient(IPAddress.Loopback, 2107);
-            PoAppChatClient.ChatClient.Connect();
-            _btnConnect.Value = "Disconnect";
-            _btnConnect.Refresh();
+            AddFriendListItem(username, PoConnectedStatus.Online);
         }
 
-        protected override void DisposeContent()
+        private void ChatClient_OnUserDisconnected(string username, string domain)
         {
-            if (_inputServerAddress != null)
+            foreach (var item in this)
             {
-                _inputServerAddress.Dispose();
-                _inputServerAddress = null;
+                if (!(item is PoUIFriendListItem friendListItem)) continue;
+                if (friendListItem.FriendName != username) continue;
+                friendListItem.SetStateIndicator(PoConnectedStatus.Offline);
+                return;
             }
+            AddFriendListItem(username, PoConnectedStatus.Offline);
+        }
+
+        private void AddFriendListItem(string username, PoConnectedStatus connectedStatus)
+        {
+            var item = new PoUIFriendListItem(username, PoConnectedStatus.Offline);
+            item.Script.InitScript(PoUIEventType.OnClick);
+            item.Script.OnClick += FriendListItem_OnClick;
+            Add(item);
+        }
+
+        private void FriendListItem_OnClick(object sender, PoHttpRequest e)
+        {
+            if (!(sender is PoUIFriendListItem item)) return;
+            OnFriendSelected?.Invoke(this, item.FriendName);
         }
     }
 }

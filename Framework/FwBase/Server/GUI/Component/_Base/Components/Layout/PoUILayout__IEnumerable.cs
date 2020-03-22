@@ -9,7 +9,10 @@ namespace ProjectOne
     {
         public IEnumerator<PoUIComponent> GetEnumerator()
         {
-            return _items.GetEnumerator();
+            lock (_sync)
+            {
+                return _items.GetEnumerator();
+            }
         }
 
         IEnumerator IEnumerable.GetEnumerator()

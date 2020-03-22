@@ -7,6 +7,7 @@ namespace ProjectOne
 {
     public abstract partial class PoItemManager<T> where T : PoManagedItem
     {
+        //TODO thread safe!
         private readonly List<T> _items;
 
         protected PoItemManager()

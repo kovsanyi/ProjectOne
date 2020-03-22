@@ -1,0 +1,10 @@
+﻿.btn {
+	border: 1px solid transparent;
+	cursor: pointer;
+}
+
+.btn-info {
+	color: white;
+	background-color: #05abe7;
+	border-color: #06a0d7;
+}

@@ -23,7 +23,7 @@ namespace ProjectOne
             }
             catch (Exception e)
             {
-                PoLogger.Log(PoLogSource.Default, PoLogType.Error, $"Error while starting server: {_listener.Prefixes.FirstOrDefault()}. Exception: {e.Message}");
+                PoLogger.LogException(PoLogSource.Default, e, $"Error while starting server: {_listener.Prefixes.FirstOrDefault()}.");
             }
         }
 

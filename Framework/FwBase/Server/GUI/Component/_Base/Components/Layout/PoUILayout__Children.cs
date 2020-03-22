@@ -8,16 +8,19 @@ namespace ProjectOne
     {
         public override void IndexChildren(ref Dictionary<string, PoUIComponent> children)
         {
-            foreach (var child in this)
+            lock (_sync)
             {
-                if (children.TryAdd(child.ID, child)) continue;
-                PoLogger.Log(PoLogSource.Default, PoLogType.Error,
-                    $"Cannot index a child {child.GetType()} {child.ID} of {GetType()} {ID}. ID already exists in chain.");
-            }
+                foreach (var child in this)
+                {
+                    if (children.TryAdd(child.ID, child)) continue;
+                    PoLogger.Log(PoLogSource.Default, PoLogType.Error,
+                        $"Cannot index child {child.GetType()} {child.ID} of {GetType()} {ID}. ID already exists in chain.");
+                }
 
-            foreach (var child in this)
-            {
-                child.IndexChildren(ref children);
+                foreach (var child in this)
+                {
+                    child.IndexChildren(ref children);
+                }
             }
         }
     }

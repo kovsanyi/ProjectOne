@@ -6,6 +6,8 @@ namespace ProjectOne
 {
     public class PoRequestFilterIndex : IPoRequestFilter
     {
+        public string Name => "Index";
+
         public bool ProcessRequest(PoHttpContext context)
         {
             if (context.Request.Url.AbsolutePath != "/") return false;

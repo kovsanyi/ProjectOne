@@ -19,7 +19,7 @@ namespace ProjectOne
         public void CreateToolbar(PoUIMapToolbar mapToolbar)
         {
             mapToolbar.AddToolbarItem(PAGE_HOME, PAGE_HOME, PoIcon.App_Home, string.Empty);
-            mapToolbar.AddToolbarItem(PAGE_USER, PAGE_USER, PoIcon.App_User, string.Empty);
+            //mapToolbar.AddToolbarItem(PAGE_USER, PAGE_USER, PoIcon.App_User, string.Empty);
             mapToolbar.AddSeparator();
             mapToolbar.AddToolbarItem(PAGE_EVENTS, PAGE_EVENTS, PoIcon.App_Events, "Events occured in the application");
             mapToolbar.AddToolbarItem(PAGE_SETTINGS, PAGE_SETTINGS, PoIcon.App_Settings, "Manage application settings");

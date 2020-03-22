@@ -13,9 +13,9 @@ namespace ProjectOne
         public readonly string RemoteIP;
         public readonly string RemoteEndPoint;
         public DateTime LastVisited;
-        public string Username;
+        public PoUser User;
 
-        public bool IsAuthenticated => Username == null;
+        public bool IsAuthenticated => User == null;
 
         public PoHttpSession() { }
 
@@ -34,7 +34,7 @@ namespace ProjectOne
 
         public override string ToString()
         {
-            return $"{RemoteEndPoint} {UserAgent} {LastVisited.ToString(CultureInfo.InvariantCulture)} Username: {Username ?? "guest"}";
+            return $"{RemoteEndPoint} {UserAgent} {LastVisited.ToString(CultureInfo.InvariantCulture)} Username: {User?.Name ?? "guest"}";
         }
     }
 }
